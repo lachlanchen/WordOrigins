@@ -1,0 +1,109 @@
+{
+  "word": "revolution",
+  "meaning": "A forcible overthrow of a government or social order, in favor of a new system; a dramatic and wide-reaching change in conditions, attitudes, or operation.",
+  "example_words": ["the industrial revolution", "a revolution in consumer habits"],
+  "language": "English",
+  "synonyms_in_other_languages": {
+    "japanese": "革命",
+    "arabic": "ثورة",
+    "french": "révolution",
+    "chinese": "革命"
+  },
+  "tracing": [
+    "revolution <-- Middle English (revolucioun, meaning a revolving) <-- Latin (revolutio) <-- revolvere (roll back, unroll, unfold)"
+  ],
+  "history": "The term 'revolution' was first used in the 14th century, primarily in astronomy, to refer to the orbital movement of a celestial body. Its use to signify a major change in political or social conditions emerged in the 17th century.",
+  "parts": [
+    {
+      "part": "revol",
+      "type": "root"
+    },
+    {
+      "part": "-ution",
+      "type": "suffix"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "revol",
+      "meaning": "roll back, revolve",
+      "example_words": ["revolve", "revolver"],
+      "language": "Latin",
+      "history": "Derived from Latin 'revolvere', meaning to roll back or revolve, indicating movement in a circular path.",
+      "tracing": [
+        "revol <-- Latin 'revolvere'"
+      ],
+      "etymology": [
+        {
+          "part": "revolvere",
+          "meaning": "to roll back, unroll, unfold",
+          "language": "Latin",
+          "history": "Consists of 're-' (again, back) and 'volvere' (to roll), indicating the action of rolling or turning around.",
+          "example_words": ["evolve", "involve", "devolve"],
+          "tracing": [
+            "revolvere <-- 're-' + 'volvere'"
+          ],
+          "etymology": [
+            {
+              "part": "re-",
+              "meaning": "again, back",
+              "language": "Proto-Indo-European",
+              "history": "A common prefix in Latin and other Indo-European languages indicating repetition or backward motion.",
+              "example_words": ["return", "retract", "revert"],
+              "tracing": [
+                "re- <-- Proto-Indo-European '*wret-, *wert-'"
+              ],
+              "etymology": []
+            },
+            {
+              "part": "volvere",
+              "meaning": "to roll, to turn",
+              "language": "Latin",
+              "history": "Related to the Proto-Indo-European root '*wel-', meaning to turn, bend.",
+              "example_words": ["volume", "convolution", "involute"],
+              "tracing": [
+                "volvere <-- Proto-Indo-European '*wel-'"
+              ],
+              "etymology": [
+                {
+                  "part": "*wel-",
+                  "meaning": "to turn, bend, roll",
+                  "language": "Proto-Indo-European",
+                  "history": "A root that has produced various derivatives related to turning and twisting motions.",
+                  "example_words": ["well", "willow", "wallow"],
+                  "tracing": [
+                    "*wel- <-- Proto-Indo-European base"
+                  ],
+                  "etymology": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part": "-ution",
+      "meaning": "the action or process of",
+      "example_words": ["constitution", "solution", "evolution"],
+      "language": "Latin",
+      "history": "A suffix used to form nouns indicating the action or process of the verb it is derived from.",
+      "tracing": [
+        "-ution <-- Latin '-utionem, -utionis'"
+      ],
+      "etymology": [
+        {
+          "part": "-utionem, -utionis",
+          "meaning": "suffix forming abstract nouns indicating action or condition",
+          "language": "Latin",
+          "history": "Used in the formation of abstract nouns from verbs, often denoting the result of an action or a state or condition.",
+          "example_words": ["institution", "execution", "resolution"],
+          "tracing": [
+            "-utionem, -utionis <-- Latin verb stem + '-tion' suffix"
+          ],
+          "etymology": []
+        }
+      ]
+    }
+  ]
+}

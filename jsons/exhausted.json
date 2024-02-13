@@ -1,0 +1,93 @@
+{
+  "word": "exhausted",
+  "meaning": "drained of one's physical or mental resources; very tired",
+  "example_words": ["I'm exhausted after the workout.", "The resources are nearly exhausted."],
+  "language": "English",
+  "synonyms_in_other_languages": {
+    "japanese": "疲れ果てた",
+    "arabic": "مُنهَك",
+    "french": "épuisé",
+    "chinese": "筋疲力尽"
+  },
+  "tracing": [
+    "exhausted <-- exhaust <-- ex- + haurire"
+  ],
+  "history": "Originally from Latin 'exhaurire' meaning 'to draw out' or 'to drain', it evolved into 'exhaust' in English, signifying the act of draining something completely.",
+  "parts": [
+    {
+      "part": "ex-",
+      "type": "prefix"
+    },
+    {
+      "part": "haurire",
+      "type": "root"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "ex-",
+      "meaning": "out, away from",
+      "example_words": ["exclude", "expel", "extend"],
+      "language": "Latin",
+      "history": "This prefix comes from Latin, indicating removal or separation.",
+      "tracing": [
+        "ex- <-- ex (Latin)"
+      ],
+      "etymology": [
+        {
+          "part": "ex",
+          "meaning": "out of, from within",
+          "language": "Latin",
+          "history": "Rooted in Indo-European languages, indicating outward motion.",
+          "example_words": ["exit", "exile"],
+          "tracing": [
+            "ex (Latin) <-- eghs (Proto-Indo-European)"
+          ],
+          "etymology": [
+            {
+              "part": "eghs",
+              "meaning": "out",
+              "language": "Proto-Indo-European",
+              "history": "Ancient root denoting outward movement or direction.",
+              "example_words": ["exodus (through Latin)"],
+              "tracing": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part": "haurire",
+      "meaning": "to draw water, to draw out",
+      "example_words": ["exhaust", "inexhaustible"],
+      "language": "Latin",
+      "history": "Used in Latin to describe the act of drawing out, especially liquids.",
+      "tracing": [
+        "haurire <-- haustus (Latin)"
+      ],
+      "etymology": [
+        {
+          "part": "haustus",
+          "meaning": "a drawing out, draining",
+          "language": "Latin",
+          "history": "Past participle of haurire, used in various forms to indicate the act of drawing out or consuming.",
+          "example_words": ["haustorium", "exhaustive"],
+          "tracing": [
+            "haustus <-- haurire (Latin)"
+          ],
+          "etymology": [
+            {
+              "part": "haurire",
+              "meaning": "to draw, to drink",
+              "language": "Latin",
+              "history": "Reflects the physical act of drawing liquids, metaphorically extended to resources or energy.",
+              "example_words": ["exhaust"],
+              "tracing": [],
+              "etymology": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

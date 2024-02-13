@@ -1,0 +1,104 @@
+{
+  "word": "catalyst",
+  "meaning": "A substance that increases the rate of a chemical reaction without itself undergoing any permanent chemical change.",
+  "example_words": [
+    "enzymes are catalysts for the reactions of life",
+    "the catalyst in the cracking process"
+  ],
+  "language": "English",
+  "synonyms_in_other_languages": {
+    "japanese": "触媒",
+    "arabic": "محفز",
+    "french": "catalyseur",
+    "chinese": "催化剂"
+  },
+  "tracing": [
+    "catalyst <-- catalysis (English, 1890s) <-- katalysis (Greek) <-- kata- (down, completely) + lysis (a loosening)"
+  ],
+  "history": "The term 'catalyst' was first introduced in the early 19th century by chemist Jöns Jacob Berzelius. It comes from the Greek word 'katalysis', meaning 'dissolution', which is derived from 'kata-', meaning 'down', and 'lysis', meaning 'a loosening'.",
+  "parts": [
+    {
+      "part": "cata-",
+      "type": "prefix"
+    },
+    {
+      "part": "-lyst",
+      "type": "root"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "cata-",
+      "meaning": "down, completely",
+      "example_words": [
+        "cataclysm",
+        "catastrophe"
+      ],
+      "language": "Greek",
+      "history": "Derived from the Greek 'kata-', indicating a downward movement or thoroughness.",
+      "tracing": [
+        "cata- <-- Greek 'kata-'"
+      ],
+      "etymology": [
+        {
+          "part": "kata-",
+          "meaning": "down, according to, towards",
+          "language": "Proto-Indo-European",
+          "history": "The prefix 'kata-' in Greek is traced back to the Proto-Indo-European root '*kat-', which has connotations of downward movement or direction.",
+          "example_words": [
+            "catacomb",
+            "catalog"
+          ],
+          "tracing": [
+            "kata- <-- Proto-Indo-European '*kat-'"
+          ],
+          "etymology": []
+        }
+      ]
+    },
+    {
+      "part": "-lyst",
+      "meaning": "agent causing loosening",
+      "example_words": [
+        "analyst",
+        "catalyst"
+      ],
+      "language": "Greek",
+      "history": "Derived from the Greek 'lysis', meaning a loosening or dissolution, related to 'lyein', meaning to loosen or untie.",
+      "tracing": [
+        "-lyst <-- lysis (Greek)"
+      ],
+      "etymology": [
+        {
+          "part": "lysis",
+          "meaning": "a loosening, dissolution",
+          "language": "Greek",
+          "history": "Originates from 'lyein', to loosen, with applications in medical and scientific language to indicate breaking down or dissolving.",
+          "example_words": [
+            "analysis",
+            "paralysis"
+          ],
+          "tracing": [
+            "lysis <-- Greek 'lyein'"
+          ],
+          "etymology": [
+            {
+              "part": "lyein",
+              "meaning": "to loosen, untie, solve",
+              "language": "Proto-Indo-European",
+              "history": "The verb 'lyein' is traced back to the Proto-Indo-European root '*leu-', which means to loosen, divide, cut apart.",
+              "example_words": [
+                "loose",
+                "solve"
+              ],
+              "tracing": [
+                "lyein <-- Proto-Indo-European '*leu-'"
+              ],
+              "etymology": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

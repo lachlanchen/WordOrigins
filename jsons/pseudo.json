@@ -1,0 +1,138 @@
+{
+  "word": "pseudopseudohypoparathyroidism",
+  "meaning": "a medical condition that mimics the symptoms of the condition known as pseudohypoparathyroidism, but without the associated biochemical abnormalities.",
+  "language": "English",
+  "synonyms_in_other_languages": {
+    "japanese": "偽偽副甲状腺機能低下症",
+    "arabic": "الكاذب المزيف لنقص نشاط الغدة جار الدرقية",
+    "french": "pseudopseudohypoparathyroïdisme",
+    "chinese": "假性假性甲状旁腺功能减退症"
+  },
+  "history": "The term describes a rare inherited disorder that affects the bones and growth. Its name reflects the complexity of diagnosing endocrine disorders.",
+  "parts": [
+    {
+      "part": "pseudo",
+      "type": "prefix"
+    },
+    {
+      "part": "pseudo",
+      "type": "prefix"
+    },
+    {
+      "part": "hypo",
+      "type": "prefix"
+    },
+    {
+      "part": "para",
+      "type": "prefix"
+    },
+    {
+      "part": "thyroid",
+      "type": "root"
+    },
+    {
+      "part": "ism",
+      "type": "suffix"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "pseudo",
+      "meaning": "false, deceptive",
+      "example_words": ["pseudonym", "pseudoscience"],
+      "language": "Greek",
+      "history": "Derived from Greek 'pseudēs' meaning false and 'pseudos' meaning falsehood.",
+      "tracing": ["pseudo <-- pseudēs (Greek) <-- pseudos (falsehood)"],
+      "etymology": [
+        {
+          "part": "pseudos",
+          "meaning": "falsehood, lie",
+          "language": "Ancient Greek",
+          "history": "Used in Greek literature and philosophy to denote something that is false or not genuine.",
+          "example_words": ["pseudology", "pseudomorph"],
+          "tracing": ["pseudos <-- Proto-Indo-European *bhaudh- (to be aware, make aware)"]
+        }
+      ]
+    },
+    {
+      "part": "hypo",
+      "meaning": "under, below normal",
+      "example_words": ["hypoglycemia", "hypotension"],
+      "language": "Greek",
+      "history": "Comes from Greek 'hypo' meaning under or below.",
+      "tracing": ["hypo <-- hypo (Greek)"],
+      "etymology": [
+        {
+          "part": "hypo",
+          "meaning": "under, below",
+          "language": "Ancient Greek",
+          "history": "Frequently used in medical and scientific terms to indicate a deficiency or lower-than-normal condition.",
+          "example_words": ["hypodermic", "hypothermia"],
+          "tracing": ["hypo <-- Proto-Indo-European *upo (under, below)"]
+        }
+      ]
+    },
+    {
+      "part": "para",
+      "meaning": "beside, near, resembling",
+      "example_words": ["parallel", "paradox"],
+      "language": "Greek",
+      "history": "Derived from Greek 'para' meaning beside, near, or related to.",
+      "tracing": ["para <-- para (Greek)"],
+      "etymology": [
+        {
+          "part": "para",
+          "meaning": "beside, beyond",
+          "language": "Ancient Greek",
+          "history": "Used in various contexts to indicate proximity, similarity, or adjacency.",
+          "example_words": ["paraprofessional", "paramilitary"],
+          "tracing": ["para <-- Proto-Indo-European *per- (forward, through)"]
+        }
+      ]
+    },
+    {
+      "part": "thyroid",
+      "meaning": "a gland in the neck that secretes hormones regulating growth and development",
+      "example_words": ["thyroidectomy", "thyrotoxicosis"],
+      "language": "Greek",
+      "history": "Derived from Greek 'thyreos' (shield) and 'oeides' (form), referring to the shield-like shape of the gland.",
+      "tracing": ["thyroid <-- thyreos + oeides (Greek)"],
+      "etymology": [
+        {
+          "part": "thyreos",
+          "meaning": "large shield",
+          "language": "Ancient Greek",
+          "history": "Refers to a type of large, door-shaped shield used in ancient Greece.",
+          "example_words": ["thyreoid", "thyreotoxic"],
+          "tracing": ["thyreos <-- Proto-Indo-European *terə- (to rub, turn)"]
+        },
+        {
+          "part": "oeides",
+          "meaning": "form, shape",
+          "language": "Ancient Greek",
+          "history": "Used to denote shape or resemblance in various compound words.",
+          "example_words": ["anthropoid", "cyclopean"],
+          "tracing": ["oeides <-- Proto-Indo-European *eid- (to see, to know)"]
+        }
+      ]
+    },
+    {
+      "part": "ism",
+      "meaning": "a distinctive practice, system, or philosophy",
+      "example_words": ["capitalism", "socialism"],
+      "language": "Greek",
+      "history": "Derived from Greek suffix '-ismos', indicating a practice, system, or behavior.",
+      "tracing": ["ism <-- ismos (Greek)"],
+      "etymology": [
+        {
+          "part": "ismos",
+          "meaning": "forming action nouns from verbs",
+          "language": "Ancient Greek",
+          "history": "Utilized in Greek to form nouns that denote a practice, system, or characteristic behavior.",
+          "example_words": ["tourism", "plagiarism"],
+          "tracing": ["ismos <-- Proto-Indo-European *dhe- (to set, put)"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "word": "extraordinary",
+  "meaning": "beyond what is usual, ordinary, regular, or established",
+  "synonyms_in_other_languages": {
+    "japanese": "非凡",
+    "arabic": "استثنائي",
+    "french": "extraordinaire",
+    "chinese": "非凡"
+  },
+  "language": "English",
+  "tracing": [
+    "extraordinary <-- extraordinarius (Latin)"
+  ],
+  "history": "The word 'extraordinary' originates from the Latin word 'extraordinarius', which combines 'extra' (outside of) with 'ordinarius' (ordinary, regular). It was used to describe things that were outside the normal order or course, and this meaning has been preserved in its usage in English.",
+  "parts": [
+    {
+      "part": "extra",
+      "type": "prefix"
+    },
+    {
+      "part": "ordinary",
+      "type": "root"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "extra",
+      "meaning": "outside of, beyond",
+      "example_words": [
+        "extraterrestrial",
+        "extraordinary",
+        "extracurricular"
+      ],
+      "language": "Latin",
+      "history": "Derived from the Latin 'extra', meaning 'outside of' or 'beyond'. It has been used in English to denote something that is outside or beyond the norm.",
+      "tracing": [
+        "extra <-- exter (Latin)"
+      ],
+      "etymology": [
+        {
+          "part": "exter",
+          "meaning": "outside, outward",
+          "language": "Latin",
+          "history": "Originates from the Latin 'exter', meaning 'outside' or 'outward'. It has roots in Proto-Indo-European language, indicating a spatial orientation.",
+          "example_words": [
+            "external",
+            "exterior"
+          ],
+          "tracing": [
+            "exter <-- *eghs (Proto-Indo-European)"
+          ],
+          "etymology": [
+            {
+              "part": "*eghs",
+              "meaning": "out",
+              "language": "Proto-Indo-European",
+              "history": "A Proto-Indo-European root meaning 'out'. It is the basis for various terms in Indo-European languages that convey the concept of external or beyond.",
+              "example_words": [
+                "exodus"
+              ],
+              "tracing": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part": "ordinary",
+      "meaning": "regular, customary",
+      "example_words": [
+        "ordinary",
+        "subordinary",
+        "extraordinary"
+      ],
+      "language": "Latin",
+      "history": "Comes from the Latin 'ordinarius', meaning regular or customary. It was used in Roman law and in the administration of the church to describe regular officers or established orders.",
+      "tracing": [
+        "ordinary <-- ordinarius (Latin)"
+      ],
+      "etymology": [
+        {
+          "part": "ordinarius",
+          "meaning": "regular, customary",
+          "language": "Latin",
+          "history": "Latin 'ordinarius' derives from 'ordo', meaning row, rank, or order, signifying something that is set or established.",
+          "example_words": [
+            "order",
+            "ordinal"
+          ],
+          "tracing": [
+            "ordinarius <-- ordo (Latin)"
+          ],
+          "etymology": [
+            {
+              "part": "ordo",
+              "meaning": "row, rank, order",
+              "language": "Latin",
+              "history": "Latin term for a row or sequence, which has been foundational in organizing structures within societies, from Roman military formations to ecclesiastical ranks.",
+              "example_words": [
+                "order",
+                "ordinary",
+                "coordinate"
+              ],
+              "tracing": [
+                "ordo <-- *ar- (Proto-Indo-European)"
+              ],
+              "etymology": [
+                {
+                  "part": "*ar-",
+                  "meaning": "to fit together",
+                  "language": "Proto-Indo-European",
+                  "history": "A Proto-Indo-European root meaning 'to fit together' or 'to arrange', reflecting an inherent human tendency to organize and classify.",
+                  "example_words": [
+                    "army",
+                    "articulate"
+                  ],
+                  "tracing": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
