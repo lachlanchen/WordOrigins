@@ -16,6 +16,11 @@ current_os = platform.system()
 
 print("current_os: ", current_os)
 
+from matplotlib.font_manager import fontManager
+
+print(sorted(f.name for f in fontManager.ttflist))
+
+
 # Set font family based on the operating system
 if current_os == "Linux":
     # Ubuntu and other Linux distributions
