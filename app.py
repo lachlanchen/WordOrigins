@@ -32,10 +32,17 @@ class WordHandler(tornado.web.RequestHandler):
         graph.plot_graph(save_path=image_path)
         
         # Retrieve all images for the carousel
-        images = [f for f in os.listdir(image_directory) if f.endswith(".png")]
+        # images = [f for f in os.listdir(image_directory) if f.endswith(".png")]
+        images = [f for f in os.listdir(image_directory) if f.startswith(word) and f.endswith(".png")]
         images = sorted(images)  # Optional: Sort or customize order
         
-        self.render("index.html", images=images)
+        # Check if it's an AJAX request
+        if self.request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            images = [f for f in os.listdir(image_directory) if f.endswith(".png")]
+            images.sort()  # Optional: customize the sorting
+            self.render("carousel_items.html", images=images)
+        else:
+            self.render("index.html", images=images)
 
 # def make_app():
 #     return tornado.web.Application([

@@ -5,21 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Etymology</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 50px;  /* Increase width */
+        height: 50px; /* Increase height */
+        background-size: 100%, 100%;
+        border-radius: 50%;  /* Optional: makes the arrows circular */
+        background-color: #000; /* Optional: adds background color */
+    }
+
+    /* Optional: adding background color for better visibility */
+    .carousel-control-prev, .carousel-control-next {
+        background: rgba(0,0,0,0.5);
+    }
+    </style>
+
+
 </head>
 <body>
     <div class="container mt-5">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <!-- index.html -->
-                {% set active = True %}
+        <!-- Search Box -->
+        <form id="searchForm" class="mb-5">
+            <div class="form-group">
+                <input type="text" class="form-control" id="wordInput" placeholder="Enter word">
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze Word</button>
+        </form>
+
+        <!-- Carousel -->
+        <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-wrap="false"> -->
+            <div id="carouselExampleControls" class="carousel slide" data-wrap="false">
+
+
+            <!-- index.html -->
+            <div class="carousel-inner" id="carouselInner">
+                {% set first_item = True %}
                 {% for image in images %}
-                <div class="carousel-item {{ 'active' if active else '' }}">
+                <div class="carousel-item {{ 'active' if first_item else '' }}">
                     <img src="{{ static_url('images/' + image) }}" class="d-block w-100" alt="{{ image }}">
                 </div>
-                {% set active = False %}
+                {% set first_item = False %}
                 {% end %}
-
             </div>
+
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -30,8 +60,21 @@
             </a>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#searchForm").submit(function(event) {
+            event.preventDefault();
+            var word = $("#wordInput").val();
+            window.location.href = `/word/${word}`; // Redirect to the word analysis page
+        });
+    });
+    </script>
+
+
+
 </body>
 </html>

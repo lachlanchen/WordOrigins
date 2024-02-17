@@ -1,0 +1,5 @@
+{% for image in images %}
+<div class="carousel-item {{ 'active' if loop.index == 1 else '' }}">
+    <img src="{{ static_url('images/' + image) }}" class="d-block w-100" alt="{{ image }}">
+</div>
+{% end %}
