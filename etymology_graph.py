@@ -303,7 +303,7 @@ class EtymologyGraph:
         self.draw_labels()
         plt.axis('off')
         if save_path:
-            plt.savefig(save_path, format='png', bbox_inches='tight')
+            plt.savefig(save_path, format='png', bbox_inches='tight', fontproperties=prop)
         # plt.show()
 
     def draw_labels(self):
