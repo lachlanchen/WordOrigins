@@ -41,9 +41,13 @@ if current_os == "Linux":
     # plt.rcParams['font.family'] = 'Noto Sans'
     # plt.rcParams['font.sans-serif'] = ['Noto Sans CJK JP', 'Noto Sans Arabic', 'Noto Sans SC']
 
-    plt.rcParams['font.family'] = 'Arial Unicode MS'
+    # plt.rcParams['font.family'] = 'Arial Unicode MS'
 
-    
+    # Path to your font
+    font_path = '/home/lachlan/Projects/etymology/arial-unicode-ms.ttf'
+
+    # Create a FontProperties object specifying the path to the font file
+    prop = font_manager.FontProperties(fname=font_path)
 
 
 elif current_os == "Darwin":
