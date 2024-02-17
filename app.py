@@ -96,8 +96,8 @@ class WordHandler(tornado.web.RequestHandler):
         
         current_word = self.get_argument("word", None)
 
-        if word:
-            word = word.lower()
+        if current_word:
+            current_word = current_word.lower()
 
         if action == "next-word" or action == "prev-word":
             if not current_word or current_word not in words:
