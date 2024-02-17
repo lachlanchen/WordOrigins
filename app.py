@@ -62,6 +62,24 @@ class GetWordEtymologyHandler(tornado.web.RequestHandler):
         image_base64 = self.get_image_as_base64_string(image_path)
         self.write({"status": "success", "word": word, "image": image_base64})
 
+    def post(self):
+        data = tornado.escape.json_decode(self.request.body)
+        word = data.get("word", "")
+
+        if not word:
+            self.write({"status": "error", "message": "No word provided"})
+            return
+
+        # image_path = os.path.join(image_directory, f"{word}.png")
+        image_path = f"{word}.png"
+
+        # Check if the image exists; if not, generate it
+        if not os.path.exists(image_path):
+            image_path = self.generate_etymology_image(word)
+
+        image_base64 = self.get_image_as_base64_string(image_path)
+        self.write({"status": "success", "word": word, "image": image_base64})
+
 
 
 class WordHandler(tornado.web.RequestHandler):
