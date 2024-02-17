@@ -28,7 +28,8 @@ with open("fontlist.txt", "w") as fd:
 # Set font family based on the operating system
 if current_os == "Linux":
     # Ubuntu and other Linux distributions
-    plt.rcParams['font.family'] = 'DejaVu Sans'
+    # plt.rcParams['font.family'] = 'DejaVu Sans'
+    plt.rcParams['font.family'] = 'Noto Sans'
 elif current_os == "Darwin":
     # macOS
     plt.rcParams['font.family'] = 'Arial Unicode MS'
