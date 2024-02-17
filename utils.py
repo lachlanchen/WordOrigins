@@ -48,4 +48,4 @@ class GradientTextureGenerator:
         # Convert the numpy array to an image and save it
         image = self.get_pil_image(Z)
         if image:
-            image.save(file_path
+            image.save(file_path)
