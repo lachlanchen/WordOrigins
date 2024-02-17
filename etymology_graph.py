@@ -31,9 +31,9 @@ if current_os == "Linux":
     # plt.rcParams['font.family'] = 'DejaVu Sans'
     # plt.rcParams['font.family'] = 'STKaiti'
     # Set the font globally
-    plt.rcParams['font.family'] = 'Noto Sans'
-    plt.rcParams['font.sans-serif'] = ['Noto Sans CJK JP', 'Noto Sans Arabic', 'Noto Sans SC']
-
+    # plt.rcParams['font.family'] = 'Noto Sans'
+    # plt.rcParams['font.sans-serif'] = ['Noto Sans CJK JP', 'Noto Sans Arabic', 'Noto Sans SC']
+    plt.rcParams['font.family'] = 'Arial Unicode MS'
 elif current_os == "Darwin":
     # macOS
     plt.rcParams['font.family'] = 'Arial Unicode MS'
