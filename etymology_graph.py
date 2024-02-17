@@ -324,7 +324,7 @@ class EtymologyGraph:
                 print(synonyms_text)
                 
                 # # plt.text(x, y - 0.5, synonyms_text, fontsize=18, ha='center', va='center', fontproperties=universal_font)
-                plt.text(x, y + 0.3, synonyms_text, fontsize=18, ha='center', va='center', color="gray")
+                plt.text(x, y + 0.3, synonyms_text, fontsize=18, ha='center', va='center', color="gray", fontproperties=prop)
                 
                 # plot_synonyms_text(x, y-0.5, synonyms, plt)
                 
