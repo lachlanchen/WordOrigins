@@ -65,7 +65,7 @@ class GetWordEtymologyHandler(tornado.web.RequestHandler):
         image_base64 = self.get_image_as_base64_string(image_path)
         self.write({"status": "success", "word": word, "image": image_base64})
 
-    def post(self):
+    def post(self, word):
         data = tornado.escape.json_decode(self.request.body)
         word = data.get("word", "")
 
