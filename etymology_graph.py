@@ -7,7 +7,25 @@ text = "Arabic: السلام عليكم - CJK: こんにちは世界"
 # Set a font that supports both Arabic and CJK characters
 # Example: 'Noto Sans CJK JP' or 'Arial Unicode MS'
 # Make sure the font is installed on your system.
-matplotlib.rcParams['font.family'] = 'Arial Unicode MS'
+# matplotlib.rcParams['font.family'] = 'Arial Unicode MS'
+
+import platform
+
+# Determine the operating system
+current_os = platform.system()
+
+print("current_os: ", current_os)
+
+# Set font family based on the operating system
+if current_os == "Linux":
+    # Ubuntu and other Linux distributions
+    plt.rcParams['font.family'] = 'Noto Sans'
+elif current_os == "Darwin":
+    # macOS
+    plt.rcParams['font.family'] = 'Arial Unicode MS'
+else:
+    # Windows and other OS (default to a widely supported font)
+    plt.rcParams['font.family'] = 'Segoe UI'
 
 # plt.figure(figsize=(10, 6))
 
