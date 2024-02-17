@@ -18,7 +18,10 @@ print("current_os: ", current_os)
 
 from matplotlib.font_manager import fontManager
 # matplotlib.font_manager._rebuild()
-print(sorted(f.name for f in fontManager.ttflist))
+# print(sorted(f.name for f in fontManager.ttflist))
+
+with open("fontlist.txt", "w") as fd:
+    fd.write(json.dumps(sorted(f.name for f in fontManager.ttflist), indent=4))
 
 
 # Set font family based on the operating system
