@@ -11,13 +11,14 @@ text = "Arabic: السلام عليكم - CJK: こんにちは世界"
 
 import platform
 import json
+import matplotlib.font_manager as font_manager
 
 # Determine the operating system
 current_os = platform.system()
 
 print("current_os: ", current_os)
 
-from matplotlib.font_manager import fontManager
+# from matplotlib.font_manager import fontManager
 # matplotlib.font_manager._rebuild()
 # print(sorted(f.name for f in fontManager.ttflist))
 
