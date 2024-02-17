@@ -29,7 +29,7 @@ with open("fontlist.txt", "w") as fd:
 if current_os == "Linux":
     # Ubuntu and other Linux distributions
     # plt.rcParams['font.family'] = 'DejaVu Sans'
-    plt.rcParams['font.family'] = 'Noto Sans'
+    plt.rcParams['font.family'] = 'STKaiti'
 elif current_os == "Darwin":
     # macOS
     plt.rcParams['font.family'] = 'Arial Unicode MS'
@@ -46,6 +46,8 @@ else:
 # plt.axis('off')  # Turn off the axis for a cleaner look
 # plt.show()
 
+
+from utils import GradientTextureGenerator
 
 import json
 import math
