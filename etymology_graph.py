@@ -17,7 +17,7 @@ current_os = platform.system()
 print("current_os: ", current_os)
 
 from matplotlib.font_manager import fontManager
-
+matplotlib.font_manager._rebuild()
 print(sorted(f.name for f in fontManager.ttflist))
 
 
