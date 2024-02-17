@@ -10,6 +10,7 @@ text = "Arabic: السلام عليكم - CJK: こんにちは世界"
 # matplotlib.rcParams['font.family'] = 'Arial Unicode MS'
 
 import platform
+import json
 
 # Determine the operating system
 current_os = platform.system()
