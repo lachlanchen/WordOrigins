@@ -1,0 +1,69 @@
+{
+  "word": "Transfer",
+  "meaning": "To move someone or something from one place, vehicle, person, or group to another.",
+  "synonyms_in_other_languages": {
+    "japanese": "転送",
+    "arabic": "نقل",
+    "french": "Transférer",
+    "chinese": "转移"
+  },
+  "language": "English",
+  "tracing": [
+    "Transfer <-- Latin transferre <-- Latin trans- (across) + ferre (to carry)"
+  ],
+  "history": "The term 'transfer' comes from the Latin word 'transferre', which combines 'trans-' meaning 'across' with 'ferre', meaning 'to carry'. It was used to describe the action of carrying something from one place to another.",
+  "parts": [
+    {
+      "part": "trans-",
+      "type": "prefix"
+    },
+    {
+      "part": "fer",
+      "type": "root"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "trans-",
+      "meaning": "Across, beyond, through",
+      "example_words": ["transcontinental", "translate", "translucent"],
+      "language": "Latin",
+      "history": "This prefix is derived from the Indo-European root *terə-2, which means 'to cross, pass through, overcome'.",
+      "tracing": [
+        "trans- <-- Latin trans (across) <-- Proto-Indo-European *terə-2 (to cross)"
+      ],
+      "etymology": [
+        {
+          "part": "*terə-2",
+          "meaning": "To cross, pass through, overcome",
+          "language": "Proto-Indo-European",
+          "history": "A root with extensive derivatives in many Indo-European languages, associated with crossing or traversing.",
+          "example_words": ["transit (English)", "traverser (French)", "durch (German for through)"],
+          "tracing": [],
+          "etymology": []
+        }
+      ]
+    },
+    {
+      "part": "fer",
+      "meaning": "To bear, carry",
+      "example_words": ["confer", "offer", "differ"],
+      "language": "Latin",
+      "history": "Derived from the Proto-Indo-European root *bher- (to carry, to bring).",
+      "tracing": [
+        "fer <-- Latin ferre (to carry) <-- Proto-Indo-European *bher- (to carry, to bring)"
+      ],
+      "etymology": [
+        {
+          "part": "*bher-",
+          "meaning": "To carry, to bring",
+          "language": "Proto-Indo-European",
+          "history": "This root is widely represented in various forms across Indo-European languages, signifying movement or transportation of objects or oneself.",
+          "example_words": ["bear (English)", "föra (Swedish for to bring)", "phero (Greek for I carry)"],
+          "tracing": [],
+          "etymology": []
+        }
+      ]
+    }
+  ]
+}

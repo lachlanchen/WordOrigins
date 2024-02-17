@@ -1,0 +1,94 @@
+{
+  "word": "Transition",
+  "meaning": "The process or a period of changing from one state or condition to another.",
+  "synonyms_in_other_languages": {
+    "japanese": "遷移",
+    "arabic": "الانتقال",
+    "french": "Transition",
+    "chinese": "过渡"
+  },
+  "language": "English",
+  "tracing": [
+    "Transition <-- Latin transitiō <-- Latin transire (to go across) <-- Latin trans- (across) + ire (to go)"
+  ],
+  "history": "Originally from Latin 'transitio', meaning 'a going across or over', transition has been used in English since the 15th century, referring to a process of change or the period during which something changes.",
+  "parts": [
+    {
+      "part": "trans-",
+      "type": "prefix"
+    },
+    {
+      "part": "it",
+      "type": "root"
+    },
+    {
+      "part": "-ion",
+      "type": "suffix"
+    }
+  ],
+  "etymology": [
+    {
+      "part": "trans-",
+      "meaning": "Across, beyond, through",
+      "example_words": ["transport", "transatlantic", "transmit"],
+      "language": "Latin",
+      "history": "Derived from the Indo-European root *terə-, meaning 'to cross over'. In Latin, 'trans' served as a prefix to denote crossing or going beyond.",
+      "tracing": [
+        "trans- <-- Latin trans (across) <-- Proto-Indo-European *terə- (to cross over)"
+      ],
+      "etymology": [
+        {
+          "part": "*terə-",
+          "meaning": "To cross over",
+          "language": "Proto-Indo-European",
+          "history": "An ancient root with descendants in multiple Indo-European languages indicating the action of crossing.",
+          "example_words": ["through (English)", "tarans (Old Irish)", "tere- (To cross in Sanskrit)"],
+          "tracing": [],
+          "etymology": []
+        }
+      ]
+    },
+    {
+      "part": "it",
+      "meaning": "Go",
+      "example_words": ["exit", "transit", "initiate"],
+      "language": "Latin",
+      "history": "From Latin 'ire', meaning 'to go'. It is part of various compounds and forms in Latin, relating to movement or progression.",
+      "tracing": [
+        "it <-- Latin ire (to go) <-- Proto-Indo-European *ei- (to go)"
+      ],
+      "etymology": [
+        {
+          "part": "*ei-",
+          "meaning": "To go",
+          "language": "Proto-Indo-European",
+          "history": "A root associated with movement and progression, with descendants in many Indo-European languages.",
+          "example_words": ["itinerary (English)", "ire (Latin)", "eimi (to go in Greek)"],
+          "tracing": [],
+          "etymology": []
+        }
+      ]
+    },
+    {
+      "part": "-ion",
+      "meaning": "Action or condition",
+      "example_words": ["action", "completion", "decision"],
+      "language": "Latin",
+      "history": "A suffix in Latin forming nouns from verbs, indicating the action or the result of the action of the verb.",
+      "tracing": [
+        "-ion <-- Latin -io (action or condition) <-- Proto-Indo-European *-tion (suffix forming nouns)"
+      ],
+      "etymology": [
+        {
+          "part": "*-tion",
+          "meaning": "Suffix forming nouns",
+          "language": "Proto-Indo-European",
+          "history": "A derivational suffix used to form abstract nouns indicating the action or result of a verb.",
+          "example_words": ["condition (English)", "nation (English)", "station (English)"],
+          "tracing": [],
+          "etymology": []
+        }
+      ]
+    }
+  ]
+}

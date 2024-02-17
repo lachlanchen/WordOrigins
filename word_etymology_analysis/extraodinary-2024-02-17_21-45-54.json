@@ -1,0 +1,124 @@
+{
+    "word": "extraodinary",
+    "prompt": "Conduct a comprehensive analysis of the word 'extraodinary', starting with its meaning, example_words, language, synonyms in Japanese, Arabic, French and Chinese, and provide an overview of its etymology. Dissect the word to identify any prefixes, roots, and suffixes it may contain. For the etymology of each identified part, provide meaning, example_words, the language of origin, a history and tracing and further etymology.\n\nDelve deeper by RECURSIVELY (to the extreme, try your best, at least 3) tracing the origins of these components to the extreme, ensuring to document the lineage of each part back to its absolute roots. Should any intermediate root have a multifaceted history, illuminate the various branches of its evolution. Present this information in a structured JSON format, adhering to the following template:\n\nUse ``` to indicates start and end, if not finished yet don't use it.Output only JSON:\n```json\n{\n  \"word\": \"extraodinary\",\n  \"meaning\": \"\",\n  \"synonyms_in_other_languages\": {\"japanese\": \"\", \"arabic\": \"\", \"french\": \"\", \"chinese\": \"\"},\n  \"language\": \"\",\n  \"tracing\": [],\n  \"history\": \"<Insert historical overview here>\",\n  \"parts\": [\n    {\n      \"part\": \"<Name of part>\",\n      \"type\": \"<Type: prefix/root/suffix>\"\n    }\n  ],\n  \"etymology\": [\n    {\n      \"part\": \"<Name of part>\",\n      \"meaning\": \"<Meaning of the part>\",\n      \"example_words\": [],\n      \"language\": \"<Language of origin>\",\n      \"history\": \"<Historical background of the part>\",\n      \"tracing\": [\"<Detailed tracing of etymology: xxx <-- yyy <-- zzz <-- www ...>\", \"xxx <-- bbb <-- ccc <-- ddd...\"],\n      \"etymology\": [\n        {\n          \"part\": \"<Sub-part name>\",\n          \"meaning\": \"<Meaning>\",\n          \"language\": \"<Language>\",\n          \"history\": \"<Historical background>\",\n          \"example_words\": [],\n          \"tracing\": [\"<Further tracing: yyy <-- zzz <-- www ...>\", \"yyy <-- ggg <-- hhh ...>\"],\n          \"etymology\": [\n            {\n              \"part\": \"<Sub-sub-part name>\"\n              ...\n              \"etymology\": [\n                  ...\n              ]\n            }\n            ...\n          ]\n        }\n      ]\n    }\n    ...\n  ]\n}\n```",
+    "response": {
+        "word": "extraordinary",
+        "meaning": "very unusual or remarkable",
+        "synonyms_in_other_languages": {
+            "japanese": "並外れた",
+            "arabic": "استثنائي",
+            "french": "extraordinaire",
+            "chinese": "非凡的"
+        },
+        "language": "English",
+        "tracing": [],
+        "history": "The word 'extraordinary' comes from the Latin 'extraordinarius', meaning 'out of the ordinary'.",
+        "parts": [
+            {
+                "part": "extra",
+                "type": "prefix"
+            },
+            {
+                "part": "ordinary",
+                "type": "root"
+            }
+        ],
+        "etymology": [
+            {
+                "part": "extra",
+                "meaning": "outside, beyond",
+                "example_words": [
+                    "extracurricular",
+                    "extraterrestrial",
+                    "extraordinary"
+                ],
+                "language": "Latin",
+                "history": "Derived from Latin 'extra', indicating outwardness or beyondness.",
+                "tracing": [
+                    "Latin: extra"
+                ],
+                "etymology": [
+                    {
+                        "part": "ex",
+                        "meaning": "out of, from",
+                        "language": "Latin",
+                        "history": "Originating in Proto-Indo-European *eghs",
+                        "example_words": [
+                            "exit",
+                            "exile"
+                        ],
+                        "tracing": [
+                            "Latin: ex <-- Proto-Indo-European: *eghs"
+                        ],
+                        "etymology": [
+                            {
+                                "part": "*eghs",
+                                "meaning": "out",
+                                "language": "Proto-Indo-European",
+                                "history": "An ancient root with no further traceable etymology, representing motion away or out.",
+                                "example_words": [],
+                                "tracing": [],
+                                "etymology": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "part": "ordinary",
+                "meaning": "with no special or distinctive features; normal",
+                "example_words": [
+                    "ordinary",
+                    "subordinary"
+                ],
+                "language": "Latin",
+                "history": "Originates from Latin 'ordinarius', meaning 'usual, common'.",
+                "tracing": [
+                    "Latin: ordinarius"
+                ],
+                "etymology": [
+                    {
+                        "part": "ordo",
+                        "meaning": "order, rank, row",
+                        "language": "Latin",
+                        "history": "Comes from the older Latin word 'ordō', signifying arrangement or a series.",
+                        "example_words": [
+                            "order",
+                            "ordinate",
+                            "ordinal"
+                        ],
+                        "tracing": [
+                            "Latin: ordo"
+                        ],
+                        "etymology": [
+                            {
+                                "part": "*arə-",
+                                "meaning": "to fit together",
+                                "language": "Proto-Indo-European",
+                                "history": "An ancient root implying assembly or arrangement.",
+                                "example_words": [
+                                    "army",
+                                    "art"
+                                ],
+                                "tracing": [
+                                    "Proto-Indo-European: *arə-"
+                                ],
+                                "etymology": [
+                                    {
+                                        "part": "*arə-",
+                                        "meaning": "Derived from a basic Indo-European root meaning 'to join, fit together'",
+                                        "language": "Proto-Indo-European",
+                                        "history": "A root without further traceable origins, signifying the base concept of fitting or assembling parts together.",
+                                        "example_words": [],
+                                        "tracing": [],
+                                        "etymology": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
