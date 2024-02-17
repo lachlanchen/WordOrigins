@@ -112,6 +112,9 @@ class WordEtymologyAnalyzer:
     def analyze_word_etymology(self, word):
         retries = 0
         ai_response = None
+
+        if word:
+            word = word.lower()
         
         if self.use_cache:
             # cached_file_path = self.check_processed(word)

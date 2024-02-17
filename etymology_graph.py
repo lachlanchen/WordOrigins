@@ -303,7 +303,7 @@ class EtymologyGraph:
         self.draw_labels()
         plt.axis('off')
         if save_path:
-            plt.savefig(save_path, format='png', bbox_inches='tight', fontproperties=prop)
+            plt.savefig(save_path, format='png', bbox_inches='tight')
         # plt.show()
 
     def draw_labels(self):
@@ -351,7 +351,7 @@ class EtymologyGraph:
                     if platform == "Linux":
                         plt.text(x, y + 0.25 * (n_wrapped+1)/2, f"{meaning}", fontsize=14, ha='center', va='center', color='crimson', fontweight='bold', fontproperties=prop)  # Adjust color as needed
                     else:
-                        plt.text(x, y + 0.25 * (n_wrapped+1)/2, f"{meaning}", fontsize=14, ha='center', va='center', color='crimson', fontweight='bold')
+                        plt.text(x, y + 0.25 * (n_wrapped+1)/2, f"{meaning}", fontsize=14, ha='center', va='center', color='crimson', fontweight='bold', fontproperties=prop)
                 # Examples (with different font size and color)
                 examples = self.G.nodes[node].get('example_words', [])
                 

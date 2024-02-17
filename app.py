@@ -55,6 +55,9 @@ class GetWordEtymologyHandler(tornado.web.RequestHandler):
         # image_path = os.path.join(image_directory, f"{word}.png")
         image_path = f"{word}.png"
 
+        if word:
+            word = word.lower()
+
         # Check if the image exists; if not, generate it
         if not os.path.exists(image_path):
             image_path = self.generate_etymology_image(word)
@@ -65,6 +68,9 @@ class GetWordEtymologyHandler(tornado.web.RequestHandler):
     def post(self):
         data = tornado.escape.json_decode(self.request.body)
         word = data.get("word", "")
+
+        if word:
+            word = word.lower()
 
         if not word:
             self.write({"status": "error", "message": "No word provided"})
@@ -89,6 +95,10 @@ class WordHandler(tornado.web.RequestHandler):
         words = [f.rsplit('.', 1)[0] for f in images]
         
         current_word = self.get_argument("word", None)
+
+        if word:
+            word = word.lower()
+
         if action == "next-word" or action == "prev-word":
             if not current_word or current_word not in words:
                 current_word = words[0]  # Default to the first word if not specified or not found.
