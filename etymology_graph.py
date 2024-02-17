@@ -24,6 +24,12 @@ from matplotlib.font_manager import fontManager
 with open("fontlist.txt", "w") as fd:
     fd.write(json.dumps(sorted(f.name for f in fontManager.ttflist), indent=4))
 
+# Path to your font
+font_path = '/home/lachlan/Projects/etymology/arial-unicode-ms.ttf'
+
+# Create a FontProperties object specifying the path to the font file
+prop = font_manager.FontProperties(fname=font_path)
+
 
 # Set font family based on the operating system
 if current_os == "Linux":
@@ -35,6 +41,9 @@ if current_os == "Linux":
     # plt.rcParams['font.sans-serif'] = ['Noto Sans CJK JP', 'Noto Sans Arabic', 'Noto Sans SC']
 
     plt.rcParams['font.family'] = 'Arial Unicode MS'
+
+    
+
 
 elif current_os == "Darwin":
     # macOS
@@ -333,8 +342,11 @@ class EtymologyGraph:
                     meaning_wrapped = wrap(meaning, 10)[:2]
                     n_wrapped = len(meaning_wrapped)
                     meaning = "\n".join(meaning_wrapped)
-                    plt.text(x, y + 0.25 * (n_wrapped+1)/2, f"{meaning}", fontsize=14, ha='center', va='center', color='crimson', fontweight='bold')  # Adjust color as needed
-
+                    
+                    if platform == "Linux":
+                        plt.text(x, y + 0.25 * (n_wrapped+1)/2, f"{meaning}", fontsize=14, ha='center', va='center', color='crimson', fontweight='bold', fontproperties=prop)  # Adjust color as needed
+                    else:
+                        plt.text(x, y + 0.25 * (n_wrapped+1)/2, f"{meaning}", fontsize=14, ha='center', va='center', color='crimson', fontweight='bold')
                 # Examples (with different font size and color)
                 examples = self.G.nodes[node].get('example_words', [])
                 
