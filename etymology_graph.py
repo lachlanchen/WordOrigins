@@ -296,7 +296,7 @@ class EtymologyGraph:
         def scale(factor):
             return int(16*factor),int(9*factor)
             # return int(9*factor), int(16*fßactor)
-        plt.figure(figsize=scale(1.2))
+        plt.figure(figsize=scale(1))
         node_colors = ["lightblue" if node != 0 else "yellow" for node in self.G.nodes()]
         nx.draw_networkx_nodes(self.G, self.pos, node_size=3000, node_color=node_colors, alpha=0.8)
         nx.draw_networkx_edges(self.G, self.pos, arrowstyle="<|-", arrowsize=30, edge_color="black")
