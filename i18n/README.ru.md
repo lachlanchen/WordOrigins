@@ -1,9 +1,11 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
 # WordOrigins
 
-Инструмент для анализа этимологии слов и визуализации результатов в виде интерактивных графов.
+Инструмент для анализа этимологии слов и визуализации её в виде интерактивных графов.
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#prerequisites)
 [![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#overview)
@@ -12,82 +14,92 @@
 [![Graph](https://img.shields.io/badge/Visualization-NetworkX%20%2B%20Matplotlib-1f6feb)](#etymologygraph)
 [![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#features)
 
-![Word Origins Demo](word_origins.jpg)
+![Демонстрация Word Origins](word_origins.jpg)
 
-## Overview
+## Краткий обзор
 
-WordOrigins — это веб-приложение на Python, которое позволяет изучать этимологию (происхождение и историческое развитие) слов. Оно выполняет подробный анализ эволюции слов, разбирает их на составные части, рекурсивно отслеживает языковую родословную каждой части и отображает результат как изображение графа в браузере.
+| Область | Детали |
+|---|---|
+| 🌐 Доступ | Веб-интерфейс для интерактивного просмотра и API для выдачи PNG в base64 |
+| 🧠 Интеллект | Этимологический анализ на базе OpenAI со структурированным разбором JSON |
+| 🧰 Воспроизводимость | Кэшированные JSON и PNG-артефакты для каждого обработанного слова |
+| 🌍 Поддержка языков | Мультиязычный рендеринг для CJK и арабского языков с включёнными шрифтами |
 
-### ✨ Key Features
+## Обзор
 
-- Подробный этимологический анализ любого слова
+WordOrigins — это веб-приложение на Python, которое позволяет исследовать этимологию (происхождение и историческое развитие) слов. Оно даёт детальный анализ того, как слова менялись со временем, разбивает их на составные части, рекурсивно прослеживает языковую родословную каждой части и отображает результат как графическое изображение для просмотра в браузере.
+
+### ✨ Ключевые возможности
+
+- Детальный этимологический анализ любого слова
 - Визуальное представление происхождения слова в виде графа
 - Поддержка нескольких языков, включая английский, французский, арабский, японский и китайский
 - Интерактивный веб-интерфейс для исследования
 
-## Features
+## Возможности
 
-| Feature | Details |
+| Функция | Детали |
 |---|---|
-| 🔎 Web UI | Поиск и просмотр сгенерированных этимологических графов |
-| 🧠 OpenAI-backed analysis | Использует OpenAI API для получения структурированного этимологического вывода |
-| 💾 Caching | Кэширует ответы OpenAI как JSON-снимки с временными метками |
-| 🖼️ Artifact generation | Кэширует JSON- и PNG-артефакты для ранее проанализированных слов |
-| 🌍 Multilingual rendering | Поддержка шрифтов CJK и Arabic включена в репозиторий |
-| ↔️ Navigation | Переход к следующему/предыдущему слову среди сгенерированных изображений |
-| 🔌 API support | Endpoint возвращает PNG в формате base64 |
+| 🔎 Веб-интерфейс | Поиск и просмотр сгенерированных этимологических графов |
+| 🧠 Анализ с OpenAI | Использует API OpenAI для получения структурированного этимологического результата |
+| 💾 Кэширование | Кэширует ответы OpenAI в виде JSON-снимков с временными метками |
+| 🖼️ Генерация артефактов | Кэширует JSON- и PNG-артефакты для ранее проанализированных слов |
+| 🌍 Мультиязычный рендеринг | Поддержка шрифтов CJK и арабского языка включена в репозиторий |
+| ↔️ Навигация | Просмотр следующих/предыдущих сгенерированных изображений слов |
+| 🔌 Поддержка API | Эндпоинт возвращает PNG в формате base64 |
 
-## How It Works
+## Как это работает
 
 1. Введите слово, которое хотите проанализировать.
-2. Система подключается к API OpenAI для углубленного этимологического анализа.
-3. Анализатор валидирует/разбирает вывод модели в структурированный JSON.
+2. Система подключается к API OpenAI для глубинного анализа этимологии.
+3. Анализатор валидирует и разбирает вывод модели в структурированный JSON.
 4. Результаты кэшируются и преобразуются в ориентированный граф.
-5. Граф рендерится в PNG и отображается в веб-интерфейсе.
-6. Можно просматривать ранее проанализированные слова.
+5. Граф рендерится как PNG и отображается в веб-интерфейсе.
+6. Вы можете просматривать ранее проанализированные слова.
 
-## Project Structure
+## Структура проекта
 
 ```text
 WordOrigins/
 ├─ README.md
 ├─ LICENSE
-├─ app.py                              # Tornado web server entrypoint
-├─ word_etymology_analyzer.py          # OpenAI-backed etymology analysis + caching
-├─ etymology_graph.py                  # NetworkX + Matplotlib graph generation
-├─ utils.py                            # Image/texture helper utilities
+├─ app.py                              # Точка входа веб-сервера Tornado
+├─ word_etymology_analyzer.py          # Этимологический анализ на базе OpenAI + кэширование
+├─ etymology_graph.py                  # Генерация графов с помощью NetworkX + Matplotlib
+├─ utils.py                            # Утилиты для работы с изображениями/текстурами
 ├─ templates/
-│  ├─ index.html                       # Main UI
+│  ├─ index.html                       # Основной интерфейс
+│  ├─ index.html.old                   # Устаревший вариант шаблона
 │  └─ carousel_items.html
 ├─ static/
-│  └─ images/                          # Primary rendered PNG outputs
+│  └─ images/                          # Основные сгенерированные PNG-изображения
 ├─ statics/
-│  └─ images/                          # Legacy duplicate image folder
-├─ jsons/                              # Per-word JSON and image artifacts
-├─ word_etymology_analysis/            # Timestamped model response cache
-├─ processed_words.csv                 # Processed word log
-├─ i18n/                               # Reserved for multilingual README/docs files
-├─ archived_code/                      # Historical notebooks/code
-├─ archived_data/                      # Historical JSON outputs
-├─ etymology*.ipynb                    # Notebook experiments
-├─ Noto Sans CJK Regular/              # Bundled CJK font
+│  └─ images/                          # Исторический дублирующийся каталог изображений
+├─ jsons/                              # JSON и изображения для каждого слова
+├─ word_etymology_analysis/            # Кэш ответов модели с отметками времени
+├─ processed_words.csv                  # Журнал обработанных слов
+├─ i18n/                               # Многоязычные README и документация
+├─ archived_code/                      # Исторические блокноты/код
+├─ archived_data/                      # Исторические JSON-артефакты
+├─ etymology*.ipynb                    # Эксперименты в Jupyter
+├─ Noto Sans CJK Regular/              # Включённый шрифт CJK
 ├─ Noto_Sans/
-├─ Noto_Sans,Noto_Sans_Arabic/         # Bundled Arabic + Noto families
-└─ arial-unicode-ms.ttf                # Unicode-supporting font
+├─ Noto_Sans,Noto_Sans_Arabic/         # Включённые семейства Noto и арабский шрифт
+└─ arial-unicode-ms.ttf                # Шрифт с поддержкой Unicode
 ```
 
-## Prerequisites
+## Требования
 
 - Python 3.8+
-- OpenAI API key
+- Ключ API OpenAI
 - Необходимые шрифты (включены в репозиторий):
   - Noto Sans CJK Regular
   - Noto Sans Arabic
   - Arial Unicode MS
 
-## Installation
+## Установка
 
-### Setup
+### Настройка
 
 1. Клонируйте репозиторий:
    ```bash
@@ -100,14 +112,14 @@ WordOrigins/
    pip install -r requirements.txt
    ```
 
-3. Установите OpenAI API key в переменную окружения:
+3. Установите ключ API OpenAI как переменную окружения:
    ```bash
    export OPENAI_API_KEY=your_api_key_here
    ```
 
-### Notes on dependencies
+### Примечания по зависимостям
 
-Код импортирует эти пакеты во время выполнения:
+Код импортирует следующие пакеты во время выполнения:
 - `tornado`
 - `openai`
 - `matplotlib`
@@ -117,172 +129,178 @@ WordOrigins/
 - `cjkwrap`
 - `json5`
 
-Предположение: `requirements.txt` должен включать перечисленные выше пакеты. Если в вашей локальной копии `requirements.txt` отсутствует, установите их вручную.
+Предположение: `requirements.txt` должен содержать перечисленные пакеты. Если в вашей локальной копии `requirements.txt` отсутствует, установите их вручную.
 
-## Usage
+## Использование
 
-### Running the Web Application
+### Запуск веб-приложения
 
-Запустите Tornado web server:
+Запустите веб-сервер Tornado:
 
 ```bash
 python app.py
 ```
 
-Затем откройте в браузере `http://localhost:7788`.
+Затем откройте браузер и перейдите на `http://localhost:7788`.
 
-### Typical user flow
+### Типичный пользовательский поток
 
 1. Откройте `http://localhost:7788`.
-2. Введите слово в поле поиска.
-3. Приложение выполняет анализ и рендерит этимологический граф.
-4. Используйте элементы управления previous/next для просмотра сгенерированных слов.
+2. Введите слово в строку поиска.
+3. Приложение анализирует слово и рендерит этимологический граф.
+4. Используйте элементы управления «предыдущее/следующее» для просмотра сгенерированных слов.
 
-### API Endpoints
+### API-эндпоинты
 
-| Method | Endpoint | Description |
+| Метод | Эндпоинт | Описание |
 |---|---|---|
-| `GET` | `/word/{word_to_analyze}` | Генерирует и отображает этимологический граф для слова |
-| `GET` | `/word/next-word` | Перейти к следующему слову в списке |
-| `GET` | `/word/prev-word` | Перейти к предыдущему слову в списке |
-| `GET/POST` | `/get_word_etymology/{word}` | API endpoint для получения данных этимологии как base64 PNG payload |
+| `GET` | `/word/{word_to_analyze}` | Генерирует и показывает этимологический граф для слова |
+| `GET` | `/word/next-word` | Переход к следующему слову в списке |
+| `GET` | `/word/prev-word` | Переход к предыдущему слову в списке |
+| `GET/POST` | `/get_word_etymology/{word}` | API-эндпоинт для получения этимологических данных как base64 PNG |
 
-### Example API calls
+### Примеры вызовов API
 
 ```bash
-# Generate/view a word in browser
+# Сгенерировать/посмотреть слово в браузере
 curl "http://localhost:7788/word/etymology"
 
-# Fetch base64 image payload
+# Получить base64-подготовленный PNG
 curl "http://localhost:7788/get_word_etymology/etymology"
 ```
 
-## Configuration
+## Конфигурация
 
-### Environment variables
+### Переменные окружения
 
-- `OPENAI_API_KEY` (обязательно): API key, используемый OpenAI Python client
-- `OPENAI_MODEL` (опционально): имя модели, используемой анализатором (по умолчанию `gpt-4-0125-preview`)
+- `OPENAI_API_KEY` (обязательно): ключ API, используемый клиентом OpenAI Python
+- `OPENAI_MODEL` (необязательно): имя модели, используемой анализатором (по умолчанию `gpt-4-0125-preview`)
 
-### Runtime directories created/used by the app
+### Каталоги, используемые/создаваемые приложением
 
 - `jsons/`
 - `static/images/`
 - `word_etymology_analysis/`
 - `processed_words.csv`
 
-## Components
+## Компоненты
 
 ### WordEtymologyAnalyzer
 
-Подключается к API OpenAI для получения подробной этимологической информации по заданному слову. Включает логику кэширования и повторных попыток:
+Подключается к API OpenAI, чтобы получить подробную этимологическую информацию по заданному слову. Включает кэширование и логику повторных попыток:
 
-- Приводит входные слова к нижнему регистру
-- Пытается надежно разобрать JSON-вывод (`json5`)
-- Сохраняет снимки анализа с временными метками в `word_etymology_analysis/`
-- Ведет учет обработанных слов в `processed_words.csv`
+- Приводит входные слова к нижнему регистру и нормализует их
+- Ставит парсинг JSON-ответа в устойчивый режим (`json5`)
+- Сохраняет пометочные JSON-слепки анализа в `word_etymology_analysis/`
+- Регистрирует обработанные слова в `processed_words.csv`
 
 ### EtymologyGraph
 
-Создает визуальные представления этимологических данных с помощью NetworkX и Matplotlib:
+Создаёт визуализацию этимологических данных с помощью NetworkX и Matplotlib:
 
-- Рекурсивно отображает вложенную этимологию в узлы/ребра ориентированного графа
-- Вычисляет радиальное позиционирование на основе глубины
-- Отрисовывает подписи частей/значений/примеров и метки языков на ребрах
-- Обрабатывает рендеринг многоязычного текста с использованием включенных шрифтов
+- Рекурсивно отображает вложенную этимологию в узлы и рёбра ориентированного графа
+- Рассчитывает радиальное позиционирование по глубине
+- Отрисовывает ярлыки части/значения/примера и языковые рёбра
+- Обрабатывает мультиязычный рендеринг с включёнными шрифтами
 
-### Web Application
+### Веб-приложение
 
-Веб-сервер на Tornado, который обрабатывает запросы и отдает пользовательский интерфейс:
+Веб-сервер на Tornado, который обрабатывает запросы и отдаёт пользовательский интерфейс:
 
 - Перенаправляет `/` на `/word/etymology`
 - Рендерит графы слов из `static/images/`
 - Генерирует отсутствующие анализы/изображения по запросу
 
-## Examples
+## Примеры
 
-### Analyze a new word
+### Проанализировать новое слово
 
 ```bash
 python app.py
-# then open http://localhost:7788/word/revolution
+# затем откройте http://localhost:7788/word/revolution
 ```
 
-Ожидаемые результаты после первого запуска:
+Ожидаемые артефакты после первого запуска:
 
 - `jsons/revolution.json`
 - `static/images/revolution.png`
 - `word_etymology_analysis/revolution-<timestamp>.json`
 
-### Browse existing generated words
+### Просмотр уже сгенерированных слов
 
 ```text
 http://localhost:7788/word/next-word?word=etymology
 http://localhost:7788/word/prev-word?word=etymology
 ```
 
-## Technical Details
+## Технические детали
 
-- Приложение сохраняет JSON-файлы проанализированных слов для кэширования.
-- Изображения генерируются в формате PNG.
-- Для многоязычной поддержки реализована специальная обработка шрифтов.
-- Макет графа вычисляется на основе глубины узлов и связей.
-- Текущий репозиторий включает исследовательские notebook-файлы и архивные артефакты, использованные в ходе разработки.
+- Приложение хранит JSON-файлы проанализированных слов для кэширования.
+- Изображения генерируются как PNG-файлы.
+- Для мультиязычной поддержки реализована специальная обработка шрифтов.
+- Макет графа рассчитывается по глубине узлов и их связям.
+- В репозитории есть исследовательские ноутбуки и архивные артефакты, созданные во время разработки.
 
-## Development Notes
+## Примечания по разработке
 
-- Основная точка входа во время выполнения — `app.py`.
-- Файлы notebook (`etymology*.ipynb`) являются экспериментальными и могут отличаться от потока production server.
-- Есть legacy/duplicate пути (`statics/` vs `static/`, `.old` files), которые сохранены для исторического контекста.
-- Текущий `.gitignore`, похоже, содержит неразрешенные маркеры merge-conflict; очистите это перед подготовкой релиза.
+- Основная точка входа приложения во время выполнения — `app.py`.
+- Файлы `etymology*.ipynb` — экспериментальные и могут отличаться от основного потока работы продакшн-сервера.
+- Существуют устаревшие/дублирующие пути (`statics/` и `static/`, файлы `.old`), оставленные для исторического контекста.
+- В текущем `.gitignore`, похоже, есть незавершённые маркеры конфликтов слияния; удалите их перед финальной сборкой релиза.
 
-## Troubleshooting
+## Решение проблем
 
-| Issue | Resolution |
+| Проблема | Решение |
 |---|---|
-| `ModuleNotFoundError` on startup | Установите отсутствующие зависимости: `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
-| `OPENAI_API_KEY` error or authentication failure | Убедитесь, что `OPENAI_API_KEY` экспортирован в той же shell-сессии, где вы запускаете `python app.py` |
-| Graph text renders as boxes or missing glyphs | Проверьте, что включенные файлы шрифтов присутствуют в ожидаемых путях репозитория |
-| No image generated for a word | Проверьте логи сервера на JSON parse retries/exceptions и подтвердите доступ к сети/API |
-| `pip install -r requirements.txt` fails because file is missing | Создайте локальный файл зависимостей на основе списка пакетов в этом README или установите пакеты напрямую |
+| `ModuleNotFoundError` при запуске | Установите недостающие зависимости: `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
+| Ошибка `OPENAI_API_KEY` или сбой аутентификации | Убедитесь, что `OPENAI_API_KEY` экспортирован в той же сессии оболочки, где запускается `python app.py` |
+| Текст графа отображается как квадраты или пропущенные глифы | Убедитесь, что нужные файлы шрифтов присутствуют по ожидаемым путям репозитория |
+| Для слова не сгенерировалось изображение | Проверьте логи сервера на повторные попытки/исключения разбора JSON и убедитесь, что есть доступ к сети/API |
+| `pip install -r requirements.txt` падает из-за отсутствующего файла | Создайте локальный файл зависимостей по списку пакетов из этого README или установите пакеты напрямую |
 
-## Roadmap
+## ❤️ Support
 
-- Добавить поддержку большего числа языков.
-- Реализовать учетные записи пользователей для сохранения избранных этимологий.
-- Улучшить визуализацию графов с масштабированием и панорамированием.
+| Donate | PayPal | Stripe |
+|---|---|---|
+| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
+
+## Дорожная карта
+
+- Добавить поддержку дополнительных языков.
+- Реализовать пользовательские аккаунты для сохранения любимых этимологий.
+- Улучшить визуализацию графа с масштабированием и панорамированием.
 - Добавить более подробную лингвистическую информацию.
-- Добавить поддерживаемый манифест зависимостей и воспроизводимую настройку окружения.
-- Добавить тесты для разбора анализатора, поведения кэширования и обработчиков маршрутов.
+- Добавить сопровождаемый манифест зависимостей и воспроизводимую настройку окружения.
+- Добавить тесты для разборки анализатора, поведения кэша и обработчиков маршрутов.
 
-## Contribution
+## Вклад
 
-Приветствуются любые вклады. Рекомендуемый процесс:
+Добро пожаловать с предложениями и вкладом. Рекомендуемый рабочий процесс:
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Make focused, reviewable changes.
-4. Validate by running `python app.py` and checking key routes.
-5. Open a pull request with a clear description and screenshots/API samples when relevant.
+1. Сделайте форк репозитория.
+2. Создайте ветку с новой функцией.
+3. Вносите сфокусированные изменения, удобные для ревью.
+4. Протестируйте запуск `python app.py` и проверьте ключевые маршруты.
+5. Откройте pull request с чётким описанием и скриншотами/API-примерами при необходимости.
 
-## Dependencies
+## Зависимости
 
 - tornado: Фреймворк веб-сервера
-- openai: OpenAI API client
+- openai: Клиент API OpenAI
 - matplotlib: Для генерации графов
-- networkx: Для структуры данных графа
+- networkx: Для структур данных графов
 - PIL/Pillow: Для обработки изображений
-- numpy: Для численных операций
-- cjkwrap: Для переноса CJK-текста
-- json5: Для надежного разбора JSON
+- numpy: Для числовых вычислений
+- cjkwrap: Для обработки обтекания CJK-текста
+- json5: Для устойчивого разбора JSON
 
-## License
+## Благодарности
+
+- OpenAI за предоставление возможности лингвистического анализа
+- Шрифты Google Noto за поддержку многоязычного текста
+
+## Лицензия
 
 Apache License 2.0
 
-Подробные условия см. в [LICENSE](LICENSE).
-
-## Acknowledgements
-
-- OpenAI за предоставление возможностей лингвистического анализа
-- Шрифты Google Noto за поддержку многоязычного текста
+Полные условия см. в [LICENSE](LICENSE).

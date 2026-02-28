@@ -1,8 +1,11 @@
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-# WordOrigins
 
 **Language options:** English (this file)
+
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
+# WordOrigins
 
 A tool for analyzing word etymologies and visualizing them as interactive graphs.
 
@@ -14,6 +17,15 @@ A tool for analyzing word etymologies and visualizing them as interactive graphs
 [![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#features)
 
 ![Word Origins Demo](word_origins.jpg)
+
+## Quick Snapshot
+
+| Area | Details |
+|---|---|
+| 🌐 Access | Web UI for interactive exploration and API for base64 PNG output |
+| 🧠 Intelligence | OpenAI-powered etymology analysis with structured JSON parsing |
+| 🧰 Reproducibility | Cached JSON + PNG artifacts for each processed word |
+| 🌍 Language Support | Multi-language rendering for CJK and Arabic with bundled fonts |
 
 ## Overview
 
@@ -59,6 +71,7 @@ WordOrigins/
 ├─ utils.py                            # Image/texture helper utilities
 ├─ templates/
 │  ├─ index.html                       # Main UI
+│  ├─ index.html.old                   # Legacy template variant
 │  └─ carousel_items.html
 ├─ static/
 │  └─ images/                          # Primary rendered PNG outputs
@@ -66,8 +79,8 @@ WordOrigins/
 │  └─ images/                          # Legacy duplicate image folder
 ├─ jsons/                              # Per-word JSON and image artifacts
 ├─ word_etymology_analysis/            # Timestamped model response cache
-├─ processed_words.csv                 # Processed word log
-├─ i18n/                               # Reserved for multilingual README/docs files
+├─ processed_words.csv                  # Processed word log
+├─ i18n/                               # Multilingual README/docs files
 ├─ archived_code/                      # Historical notebooks/code
 ├─ archived_data/                      # Historical JSON outputs
 ├─ etymology*.ipynb                    # Notebook experiments
@@ -178,7 +191,7 @@ curl "http://localhost:7788/get_word_etymology/etymology"
 
 Connects to OpenAI's API to get detailed etymology information for a given word. Includes caching and retry logic:
 
-- Lowercases input words
+- Lowers and normalizes input words
 - Attempts to parse JSON output robustly (`json5`)
 - Saves timestamped analysis snapshots in `word_etymology_analysis/`
 - Records processed words in `processed_words.csv`
@@ -247,6 +260,12 @@ http://localhost:7788/word/prev-word?word=etymology
 | No image generated for a word | Check server logs for JSON parse retries/exceptions and confirm network/API access |
 | `pip install -r requirements.txt` fails because file is missing | Create a local dependency file from the package list in this README or install packages directly |
 
+## ❤️ Support
+
+| Donate | PayPal | Stripe |
+|---|---|---|
+| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
+
 ## Roadmap
 
 - Add support for more languages.
@@ -277,13 +296,19 @@ Contributions are welcome. Suggested workflow:
 - cjkwrap: For handling CJK text wrapping
 - json5: For robust JSON parsing
 
-## License
+## ❤️ Support
 
-Apache License 2.0
-
-See [LICENSE](LICENSE) for full terms.
+| Donate | PayPal | Stripe |
+|---|---|---|
+| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
 
 ## Acknowledgements
 
 - OpenAI for providing the linguistic analysis capabilities
 - Google Noto fonts for multilingual text support
+
+## License
+
+Apache License 2.0
+
+See [LICENSE](LICENSE) for full terms.
