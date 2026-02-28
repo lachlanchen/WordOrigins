@@ -1,127 +1,238 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-**Language options:** 中文（繁體）（本頁）
-
 [![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
 
 # WordOrigins
 
-WordOrigins 是一個用來分析詞源並將結果視覺化為互動式圖形的工具。
+> 🎯 使用 OpenAI 加持、具快取友善流程，將詞源分析視覺化為多語言詞源關係有向圖。
 
-[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#先決條件)
-[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#總覽)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-[![API](https://img.shields.io/badge/API-REST-orange)](#api-端點)
+**語言選項：** 中文（繁體）（本文件）
+
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#prerequisites)
+[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#components)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](#license)
+[![API](https://img.shields.io/badge/API-REST-orange)](#api-endpoints)
 [![Graph](https://img.shields.io/badge/Visualization-NetworkX%20%2B%20Matplotlib-1f6feb)](#etymologygraph)
-[![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#功能)
+[![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#features)
+[![GitHub last commit](https://img.shields.io/github/last-commit/lachlanchen/WordOrigins?color=blue)](https://github.com/lachlanchen/WordOrigins/commits/main)
+[![GitHub issues](https://img.shields.io/github/issues/lachlanchen/WordOrigins?color=red)](https://github.com/lachlanchen/WordOrigins/issues)
+[![GitHub repo size](https://img.shields.io/github/repo-size/lachlanchen/WordOrigins?color=yellow)](https://github.com/lachlanchen/WordOrigins)
 
 ![Word Origins Demo](word_origins.jpg)
 
-## 快速總覽
+## 📘 概覽
 
-| 項目 | 說明 |
+WordOrigins 是一個用於分析詞源並將詞彙歷史關係視覺化為有向圖的 Python Web 工具。它整合了：
+
+- 一個 Tornado Web 應用。
+- 由 OpenAI 提供能力的詞源分析。
+- 帶有容錯回退機制的結構化 JSON 解析。
+- 使用 NetworkX + Matplotlib 的圖形生成。
+- 針對重複分析的快取輸出，顯著加快後續處理。
+
+它同時提供瀏覽器介面與 API 端點，用於生成並擷取詞源成果。
+
+## 📸 快速總覽
+
+| 區域 | 說明 |
 |---|---|
-| 🌐 存取方式 | 提供可互動探索的 Web UI 與輸出 Base64 PNG 的 API |
-| 🧠 智能分析 | 利用 OpenAI 進行詞源分析，並以結構化 JSON 解析 |
-| 🧰 可重現性 | 每個已處理單字皆會快取 JSON 與 PNG 輸出 |
-| 🌍 語言支援 | 內建 CJK 與阿拉伯文字體的多語言渲染 |
+| 🌐 存取方式 | 提供用於互動探索的 Web UI，並提供可輸出 base64 PNG 的 API |
+| 🧠 智慧分析 | 使用 OpenAI 進行詞源分析，並執行結構化 JSON 解析 |
+| 🧰 可重複性 | 為每個已處理詞條快取 JSON 與 PNG 成果 |
+| 🌍 語言支援 | 針對 CJK 與阿拉伯文的多語言渲染，內建字型支援 |
 
-## 總覽
-
-WordOrigins 是一個 Python 網頁應用，讓你探索單字的詞源（起源與歷史演變）。它提供單字隨時間演進的詳細分析，將詞素拆解並遞迴追溯每個組成部分的語言脈絡，最後將結果渲染為可在瀏覽器查看的圖形。
-
-### ✨ 核心特色
-
-- 針對任何單字進行深入詞源分析
-- 以圖形方式視覺化單字起源
-- 支援包括英文、法文、阿拉伯文、日文與中文在內的多種語言
-- 提供可互動的網頁介面供探索使用
-
-## 功能
+## <a id="features"></a>功能
 
 | 功能 | 說明 |
 |---|---|
-| 🔎 Web UI | 搜尋並瀏覽已產生的詞源圖形 |
-| 🧠 OpenAI 支援分析 | 使用 OpenAI API 產生結構化的詞源輸出 |
-| 💾 快取機制 | 將 OpenAI 回應快取為帶時間戳的 JSON 快照 |
-| 🖼️ 產物產生 | 快取已分析過單字的 JSON 與 PNG 產物 |
-| 🌍 多語言渲染 | 倉庫內建 CJK 與阿拉伯文字體支援 |
-| ↔️ 導覽 | 可在已產生的單字圖片間前後瀏覽 |
-| 🔌 API 支援 | 端點回傳 Base64 PNG 輸出 |
+| 🔎 Web UI | 搜尋並瀏覽已生成的詞源圖 |
+| 🧠 OpenAI 驅動分析 | 使用 OpenAI API 產生結構化詞源輸出 |
+| 💾 快取 | 儲存帶時間戳的回應快照 |
+| 🖼️ 成果輸出 | 匯出已處理詞條的 JSON 與 PNG 產物 |
+| 🌍 多語言渲染 | 內建字型支援 CJK 與阿拉伯語 |
+| ↔️ 導覽 | 透過上一頁/下一頁瀏覽已生成詞條的圖片 |
+| 🔌 API 支援 | 端點回傳包含 base64 圖片資料的 JSON 負載 |
 
-## 運作方式
+## 🛠️ 運作方式
 
-1. 輸入你想分析的單字。
-2. 系統會連線至 OpenAI API 進行深度詞源分析。
-3. 分析器驗證並解析模型輸出為結構化 JSON。
-4. 結果會被快取並轉換為有向圖。
-5. 圖形會被渲染為 PNG，並在網頁介面中顯示。
-6. 你可以瀏覽先前已分析過的單字。
+1. 使用者透過 `/word/{word}` 或網頁搜尋表單提交詞條。
+2. 分析器呼叫 OpenAI 並驗證回應結構。
+3. 解析後的資料會被標準化並持久化，以便重複使用快取。
+4. 詞源關係被轉為圖的節點與邊。
+5. NetworkX 與 Matplotlib 將有向圖渲染為 PNG。
+6. 前端與 API 回傳快取圖片路徑與相關中介資料。
 
-## 專案結構
+## 🗂️ 專案結構
 
 ```text
 WordOrigins/
-├─ README.md
-├─ LICENSE
-├─ app.py                              # Tornado web server entrypoint
-├─ word_etymology_analyzer.py          # OpenAI-backed etymology analysis + caching
-├─ etymology_graph.py                  # NetworkX + Matplotlib graph generation
-├─ utils.py                            # Image/texture helper utilities
+├─ app.py                     # Tornado web app (current entrypoint)
+├─ app.py.old                 # Legacy app variant
+├─ word_etymology_analyzer.py # OpenAI-backed analysis + retry/caching logic
+├─ etymology_graph.py         # Graph building and PNG rendering
+├─ utils.py                   # Image/font/image helper utilities
 ├─ templates/
-│  ├─ index.html                       # Main UI
-│  ├─ index.html.old                   # Legacy template variant
-│  └─ carousel_items.html
+│  ├─ index.html              # Main web UI
+│  ├─ index.html.old          # Legacy template variant
+│  └─ carousel_items.html     # Reusable UI fragment
 ├─ static/
-│  └─ images/                          # Primary rendered PNG outputs
+│  └─ images/                 # Primary runtime PNG outputs
 ├─ statics/
-│  └─ images/                          # Legacy duplicate image folder
-├─ jsons/                              # Per-word JSON and image artifacts
-├─ word_etymology_analysis/            # Timestamped model response cache
-├─ processed_words.csv                  # Processed word log
-├─ i18n/                               # Multilingual README/docs files
-├─ archived_code/                      # Historical notebooks/code
-├─ archived_data/                      # Historical JSON outputs
-├─ etymology*.ipynb                    # Notebook experiments
-├─ Noto Sans CJK Regular/              # Bundled CJK font
+│  └─ images/                 # Legacy duplicate image folder
+├─ images/                    # Screenshot/demo assets
+├─ jsons/                     # Per-word generated JSON + cached data
+├─ word_etymology_analysis/   # Timestamped model response cache
+├─ processed_words.csv         # Processed word index
+├─ i18n/                      # Translated README files
+├─ archived_code/             # Historical notebooks and scripts
+├─ archived_data/             # Historical JSON snapshots
+├─ Noto Sans CJK Regular/     # Bundled font assets
 ├─ Noto_Sans/
-├─ Noto_Sans,Noto_Sans_Arabic/         # Bundled Arabic + Noto families
-└─ arial-unicode-ms.ttf                # Unicode-supporting font
+├─ Noto_Sans,Noto_Sans_Arabic/
+├─ arial-unicode-ms.ttf       # Bundled Unicode font
+├─ etymology*.ipynb           # Development notebooks
+├─ LICENSE
+└─ .auto-readme-work/         # Pipeline artifacts
 ```
 
-## 先決條件
+## <a id="prerequisites"></a>先決條件
 
 - Python 3.8+
-- OpenAI API 金鑰
-- 所需字體（已內建於倉庫）：
-  - Noto Sans CJK Regular
-  - Noto Sans Arabic
-  - Arial Unicode MS
+- OpenAI API 憑證：
+  - `OPENAI_API_KEY`（必填）
+  - `OPENAI_MODEL`（選填，既有說明預設 `gpt-4-0125-preview`）
+- 若需要多語言渲染，請確保倉庫中包含必要字型檔案
 
-## 安裝
+## 🧰 安裝
 
-### 設定
+1. 複製儲存庫。
 
-1. 下載此倉庫：
    ```bash
    git clone https://github.com/lachlanchen/WordOrigins.git
    cd WordOrigins
    ```
 
-2. 安裝相依套件：
+2. 建立並啟用 Python 環境（建議）。
+
    ```bash
-   pip install -r requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate
    ```
 
-3. 將 OpenAI API 金鑰設為環境變數：
+3. 安裝執行時相依套件。
+
+   因本儲存庫目前沒有根層級相依清單，請直接安裝既有需求套件：
+
+   ```bash
+   pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5
+   ```
+
+4. 設定憑證。
+
    ```bash
    export OPENAI_API_KEY=your_api_key_here
+   export OPENAI_MODEL=gpt-4-0125-preview   # optional override
    ```
 
-### 相依套件說明
+## 🚀 使用
 
-程式在執行時會匯入以下套件：
+### 啟動 Web 應用
+
+```bash
+python app.py
+```
+
+在瀏覽器中開啟 `http://localhost:7788`。
+
+### 典型使用流程
+
+1. 開啟 `http://localhost:7788/word/etymology`。
+2. 輸入待查詢詞條。
+3. 等待分析完成（首次執行可能因外部 API 延遲而較久）。
+4. 瀏覽生成的圖與相關元資料。
+5. 使用上一頁/下一頁導覽瀏覽快取中的詞條。
+
+### <a id="api-endpoints"></a>API 端點
+
+| 方法 | 端點 | 說明 |
+|---|---|---|
+| `GET` | `/word/{word_to_analyze}` | 渲染指定詞條的詞源頁面 |
+| `GET` | `/word/next-word?word={word}` | 在快取中跳到下一個詞條 |
+| `GET` | `/word/prev-word?word={word}` | 在快取中跳到上一個詞條 |
+| `GET/POST` | `/get_word_etymology/{word}` | 回傳包含 base64 PNG 的 JSON 負載 |
+
+### API 呼叫範例
+
+```bash
+curl "http://localhost:7788/word/etymology"
+curl "http://localhost:7788/word/next-word?word=etymology"
+curl "http://localhost:7788/word/prev-word?word=etymology"
+curl "http://localhost:7788/get_word_etymology/etymology"
+```
+
+## ⚙️ 設定
+
+- `OPENAI_API_KEY`（必填）：分析請求所需憑證。
+- `OPENAI_MODEL`（選填）：覆寫分析器使用的模型。
+- 服務執行使用的目錄：
+  - `jsons/`
+  - `static/images/`
+  - `word_etymology_analysis/`
+  - `processed_words.csv`
+
+## 🧪 範例
+
+```bash
+python app.py
+```
+
+接著開啟：
+
+```text
+http://localhost:7788/word/revolution
+```
+
+首次分析會產生：
+
+- `jsons/revolution.json`
+- `static/images/revolution.png`
+- `word_etymology_analysis/revolution-<timestamp>.json`
+
+## <a id="components"></a>元件
+
+### WordEtymologyAnalyzer
+
+位於 `word_etymology_analyzer.py` 的此元件：
+
+- 規範化輸入詞條。
+- 呼叫 OpenAI 取得結構化詞源回應。
+- 使用 `json5` 擷取/修復 JSON 負載。
+- 重試失敗的解析嘗試並記錄失敗以提高韌性。
+- 將帶時間戳的快照寫入 `word_etymology_analysis/`。
+- 更新 `processed_words.csv` 索引。
+
+### <a id="etymologygraph"></a>EtymologyGraph
+
+位於 `etymology_graph.py` 的此元件：
+
+- 載入結構化詞源 JSON。
+- 使用遞迴祖先關係建構 `networkx.DiGraph`。
+- 計算具深度感知的圖坐標。
+- 渲染帶標籤的節點與邊並處理多語言文字。
+- 保存用於快取與展示的 `PNG` 圖片。
+
+### Web 應用
+
+在 `app.py` 中，Tornado 應用：
+
+- 提供根路徑重導向與搜尋頁行為。
+- 處理生成與快取查詢流程。
+- 在 `/word/...` 與 `/get_word_etymology/...` 下暴露頁面與 API 路由。
+- 為 API 使用者回傳包含 base64 圖片資料的 JSON 負載。
+
+## 📦 依賴套件
+
 - `tornado`
 - `openai`
 - `matplotlib`
@@ -131,178 +242,27 @@ WordOrigins/
 - `cjkwrap`
 - `json5`
 
-假設：`requirements.txt` 應包含上述套件。若你本機的副本缺少 `requirements.txt`，可依此清單手動安裝。
+## 🧱 開發說明
 
-## 使用方式
+- JSON 與圖片快取可避免不必要的重複 API 呼叫。
+- 為相容與歷史追溯保留了 `index.html` 與 `index.html.old`。
+- 歷史目錄和產物目前是有意保留的（如 `statics/`、notebooks、archives）。
+- 發現 `.gitignore` 中有未清理的合併衝突標記，屬於 README 範圍外的倉庫整潔問題。
 
-### 執行網頁應用程式
+## 🧯 故障排除
 
-啟動 Tornado Web 伺服器：
-
-```bash
-python app.py
-```
-
-接著打開瀏覽器並前往 `http://localhost:7788`。
-
-### 典型使用流程
-
-1. 開啟 `http://localhost:7788`。
-2. 在搜尋框輸入單字。
-3. 應用程式會分析並渲染詞源圖形。
-4. 使用上一個/下一個控制項來瀏覽已產生的單字。
-
-### API 端點
-
-| 方法 | 端點 | 說明 |
-|---|---|---|
-| `GET` | `/word/{word_to_analyze}` | 產生並顯示某單字的詞源圖形 |
-| `GET` | `/word/next-word` | 導覽到清單中的下一個單字 |
-| `GET` | `/word/prev-word` | 導覽到清單中的上一個單字 |
-| `GET/POST` | `/get_word_etymology/{word}` | 取得以 Base64 PNG 回傳的詞源資料 API 端點 |
-
-### API 呼叫範例
-
-```bash
-# Generate/view a word in browser
-curl "http://localhost:7788/word/etymology"
-
-# Fetch base64 image payload
-curl "http://localhost:7788/get_word_etymology/etymology"
-```
-
-## 組態設定
-
-### 環境變數
-
-- `OPENAI_API_KEY`（必填）：OpenAI Python client 使用的 API key
-- `OPENAI_MODEL`（選填）：分析器使用的模型名稱（預設為 `gpt-4-0125-preview`）
-
-### 執行期目錄（由應用程式建立/使用）
-
-- `jsons/`
-- `static/images/`
-- `word_etymology_analysis/`
-- `processed_words.csv`
-
-## 元件
-
-### WordEtymologyAnalyzer
-
-連線至 OpenAI API，取得指定單字的詳細詞源資訊，並包含快取與重試邏輯：
-
-- 將輸入單字轉為小寫並正規化
-- 嘗試穩健解析 JSON 輸出（`json5`）
-- 在 `word_etymology_analysis/` 中保存含時間戳記的分析快照
-- 將已處理的單字記錄於 `processed_words.csv`
-
-### EtymologyGraph
-
-使用 NetworkX 與 Matplotlib 產生詞源資料的視覺化結果：
-
-- 將巢狀詞源資料遞迴映射為有向圖節點/邊
-- 計算基於深度的放射狀佈局
-- 繪製詞素/詞義/範例與語言邊界標籤
-- 使用內建字體處理多語言文字渲染
-
-### 網頁應用程式
-
-基於 Tornado 的 Web 伺服器，負責處理請求並提供使用者介面：
-
-- 將 `/` 重新導向至 `/word/etymology`
-- 從 `static/images/` 渲染單字圖形
-- 依需求即時產生缺漏的分析結果與圖像
-
-## 範例
-
-### 分析新單字
-
-```bash
-python app.py
-# then open http://localhost:7788/word/revolution
-```
-
-首次執行後預期輸出：
-
-- `jsons/revolution.json`
-- `static/images/revolution.png`
-- `word_etymology_analysis/revolution-<timestamp>.json`
-
-### 瀏覽既有已生成單字
-
-```text
-http://localhost:7788/word/next-word?word=etymology
-http://localhost:7788/word/prev-word?word=etymology
-```
-
-## 技術細節
-
-- 應用程式會儲存已分析單字的 JSON 檔案作為快取。
-- 圖像會以 PNG 格式產生。
-- 已針對多語言支援實作專用字體處理。
-- 圖形版面配置依節點深度與關係計算。
-- 現有倉庫包含開發期間的探索性 notebook 與封存成果。
-
-## 開發備註
-
-- 主要執行進入點為 `app.py`。
-- Notebook 檔案（`etymology*.ipynb`）屬於實驗用途，可能與正式伺服器流程不完全一致。
-- 倉庫保留了歷史重複路徑（`statics/` 與 `static/`、`.old` 檔案）以供參考。
-- 目前 `.gitignore` 似乎包含未解決的 merge conflict 標記；發佈封裝前請先清理。
-
-## 疑難排解
-
-| 問題 | 解決方法 |
+| 問題 | 解決方式 |
 |---|---|
-| 啟動時出現 `ModuleNotFoundError` | 安裝缺少的套件：`pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
-| `OPENAI_API_KEY` 錯誤或驗證失敗 | 確保在執行 `python app.py` 的同一個 shell session 中已匯出 `OPENAI_API_KEY` |
-| 圖像文字顯示成方塊或缺字 | 確認內建字體檔案已放置於倉庫預期路徑 |
-| 某個單字未生成圖片 | 檢查伺服器日誌中的 JSON 解析重試與例外，並確認網路/API 存取正常 |
-| `pip install -r requirements.txt` 因缺檔而失敗 | 依本 README 的套件清單建立本機依賴檔，或直接安裝這些套件 |
+| 啟動時拋出 `ModuleNotFoundError` | 使用 `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` 安裝缺漏的套件 |
+| `OPENAI_API_KEY` 驗證錯誤 | 確保在執行 `python app.py` 的同一個 shell 工作階段中設定此變數 |
+| 生成圖中出現缺字/亂碼 | 確認倉庫中字型檔（`Noto Sans`、阿拉伯語字型變體、`Arial Unicode MS`）存在且可讀取 |
+| 某詞條無圖片顯示 | 檢查應用程式日誌中的 JSON 解析失敗或瞬時 API 錯誤 |
+| `pip install -r requirements.txt` 失敗或不存在 | 按上述列表直接安裝相依套件（目前倉庫未包含根層級清單） |
+
+
 
 ## ❤️ Support
 
 | Donate | PayPal | Stripe |
-|---|---|---|
-| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
-
-## 路線圖
-
-- 支援更多語言。
-- 實作使用者帳號以保存偏好的詞源結果。
-- 改善圖形互動體驗，新增縮放與平移。
-- 補充更完整的語言學資訊。
-- 加入可維護的依賴清單與可重現的環境建置流程。
-- 新增分析器解析、快取行為與路由處理的測試。
-
-## 貢獻
-
-歡迎提交貢獻。建議流程如下：
-
-1. Fork 本倉庫。
-2. 建立功能分支。
-3. 做出聚焦且易於審閱的變更。
-4. 透過執行 `python app.py` 並檢查關鍵路由來驗證。
-5. 提交拉取請求，附上清楚的說明與截圖/API 範例（如有需要）。
-
-## 相依套件
-
-- tornado：Web server 框架
-- openai：OpenAI API 用戶端
-- matplotlib：用於繪製圖形
-- networkx：圖資料結構處理
-- PIL/Pillow：影像處理
-- numpy：數值運算
-- cjkwrap：CJK 文字換行處理
-- json5：穩健 JSON 解析
-
-## 致謝
-
-- OpenAI 提供語言分析能力
-- Google Noto 字體提供多語系文字支援
-
-## 授權
-
-Apache License 2.0
-
-詳見 [LICENSE](LICENSE) 了解完整條款。
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |

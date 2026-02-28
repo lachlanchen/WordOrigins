@@ -1,130 +1,238 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-**Sprachoptionen:** Deutsch (diese Datei)
-
 [![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
 
 # WordOrigins
 
-Ein Tool zur Analyse von Wortetymologien und zur Visualisierung als interaktive Graphen.
+> 🎯 Visualisieren Sie die Herkunft von Wörtern als mehrsprachige Provenienz-Graphen in einem OpenAI-gestützten, cache-freundlichen Workflow.
 
-[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#prerequisites)
-[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#overview)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-[![API](https://img.shields.io/badge/API-REST-orange)](#api-endpoints)
+**Sprachoptionen:** Englisch (diese Datei)
+
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#voraussetzungen)
+[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#bestandteile)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](#lizenz)
+[![API](https://img.shields.io/badge/API-REST-orange)](#api-endpunkte)
 [![Graph](https://img.shields.io/badge/Visualization-NetworkX%20%2B%20Matplotlib-1f6feb)](#etymologygraph)
-[![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#features)
+[![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#funktionen)
+[![GitHub last commit](https://img.shields.io/github/last-commit/lachlanchen/WordOrigins?color=blue)](https://github.com/lachlanchen/WordOrigins/commits/main)
+[![GitHub issues](https://img.shields.io/github/issues/lachlanchen/WordOrigins?color=red)](https://github.com/lachlanchen/WordOrigins/issues)
+[![GitHub repo size](https://img.shields.io/github/repo-size/lachlanchen/WordOrigins?color=yellow)](https://github.com/lachlanchen/WordOrigins)
 
 ![Word Origins Demo](word_origins.jpg)
 
-## Kurzübersicht
+## 📘 Übersicht
+
+WordOrigins ist eine Python-Web-Anwendung zur Analyse der Wortherkunft und zur Visualisierung sprachlicher Abstammung als gerichteten Graphen. Es kombiniert:
+
+- Eine Tornado-Webanwendung.
+- OpenAI-gestützte etymologische Analyse.
+- Strukturierte JSON-Verarbeitung mit robuster Fallback-Logik.
+- Graphenerstellung via NetworkX + Matplotlib.
+- Zwischengespeicherte Ausgaben für schnelle Wiederholungsanalysen.
+
+Es stellt sowohl eine Browseroberfläche als auch API-Endpunkte zum Generieren und Abrufen etymologischer Artefakte bereit.
+
+## 📸 Kurzübersicht
 
 | Bereich | Details |
 |---|---|
 | 🌐 Zugriff | Web-UI für interaktive Erkundung und API für Base64-PNG-Ausgabe |
-| 🧠 Intelligenz | OpenAI-gestützte Etymologieanalyse mit strukturierter JSON-Verarbeitung |
-| 🧰 Reproduzierbarkeit | Zwischengespeicherte JSON- und PNG-Artefakte für jedes verarbeitete Wort |
-| 🌍 Sprachunterstützung | Mehrsprachige Darstellung für CJK- und Arabisch-Texte mit enthaltenen Schriftarten |
+| 🧠 Intelligenz | OpenAI-gestützte etymologische Analyse mit strukturierter JSON-Verarbeitung |
+| 🧰 Reproduzierbarkeit | Getaktete JSON- und PNG-Artefakte für jedes verarbeitete Wort |
+| 🌍 Sprachunterstützung | Mehrsprachige Darstellung für CJK- und Arabisch-Texte mit gebündelten Schriftarten |
 
-<a id="overview"></a>
-## Überblick
-
-WordOrigins ist eine Python-Webanwendung, mit der du die Etymologie (Herkunft und historische Entwicklung) von Wörtern untersuchen kannst. Sie liefert eine detaillierte Analyse darüber, wie Wörter sich im Laufe der Zeit entwickelt haben, zerlegt sie in einzelne Bestandteile, verfolgt rekursiv die sprachliche Abstammung jedes Bestandteils und rendert das Ergebnis als Graphbild für die Anzeige im Browser.
-
-### ✨ Hauptmerkmale
-
-- Detaillierte Etymologieanalyse beliebiger Wörter
-- Visuelle Graphendarstellung von Wortherkünften
-- Unterstützung mehrerer Sprachen, darunter Englisch, Französisch, Arabisch, Japanisch und Chinesisch
-- Interaktive Weboberfläche zur Erkundung
-
-<a id="features"></a>
 ## Funktionen
 
-| Merkmal | Details |
+| Funktion | Details |
 |---|---|
-| 🔎 Web-UI | Suche und durchsuche generierte Etymologiegraphen |
-| 🧠 OpenAI-gestützte Analyse | Verwendet die OpenAI API, um strukturierte Etymologie-Ausgaben zu erzeugen |
-| 💾 Zwischenspeicherung | Gespeicherte OpenAI-Antworten als zeitgestempelte JSON-Snapshots |
-| 🖼️ Artefakterstellung | Gespeicherte JSON- und PNG-Artefakte für bereits analysierte Wörter |
-| 🌍 Mehrsprachiges Rendering | CJK- und Arabisch-Schriftunterstützung im Repository enthalten |
-| ↔️ Navigation | Vorwärts-/Rückwärts-Navigation durch generierte Wortbilder |
-| 🔌 API-Unterstützung | Endpunkt gibt PNG-Ausgabe als Base64 zurück |
+| 🔎 Web-UI | Suche und Durchsuchen erzeugter Etymologie-Graphen |
+| 🧠 OpenAI-gestützte Analyse | Nutzt die OpenAI-API, um strukturierte etymologische Ausgaben zu erzeugen |
+| 💾 Caching | Speichert Antworten mit mit Zeitstempel versehenen JSON-Snapshots |
+| 🖼️ Artefakterstellung | Exportiert JSON- und PNG-Artefakte für verarbeitete Wörter |
+| 🌍 Mehrsprachiges Rendering | CJK + Arabisch mit im Repository enthaltenen Schriftarten |
+| ↔️ Navigation | Vorwärts-/Rückwärtsnavigation durch generierte Wortbilder |
+| 🔌 API-Support | Endpunkt liefert PNG-Ausgabe als Base64-JSON-Payload |
 
-## So funktioniert es
+## 🛠️ Funktionsweise
 
-1. Gib ein Wort ein, das du analysieren möchtest.
-2. Das System verbindet sich mit der API von OpenAI, um eine tiefgehende Etymologieanalyse durchzuführen.
-3. Der Analyzer validiert/parst die Modellausgabe zu strukturiertem JSON.
-4. Die Ergebnisse werden zwischengespeichert und in einen gerichteten Graphen umgewandelt.
-5. Der Graph wird als PNG gerendert und in der Weboberfläche angezeigt.
-6. Du kannst durch zuvor analysierte Wörter blättern.
+1. Der Nutzer übermittelt ein Wort über `/word/{word}` oder das Web-Suchformular.
+2. Der Analysator ruft OpenAI auf und validiert die Antwortstruktur.
+3. Die analysierten Daten werden normalisiert und zur Cache-Nutzung gespeichert.
+4. Etymologische Beziehungen werden in Graph-Knoten und -Kanten umgewandelt.
+5. NetworkX und Matplotlib rendern einen gerichteten Graphen als PNG.
+6. UI und API stellen den gecachten Bildpfad und zugehörige Metadaten bereit.
 
-## Projektstruktur
+## 🗂️ Projektstruktur
 
 ```text
 WordOrigins/
-├─ README.md
-├─ LICENSE
-├─ app.py                              # Tornado web server entrypoint
-├─ word_etymology_analyzer.py          # OpenAI-backed etymology analysis + caching
-├─ etymology_graph.py                  # NetworkX + Matplotlib graph generation
-├─ utils.py                            # Image/texture helper utilities
+├─ app.py                     # Tornado web app (aktueller Einstiegspunkt)
+├─ app.py.old                 # Ältere App-Variante
+├─ word_etymology_analyzer.py # OpenAI-gestützte Analyse + Retry-/Caching-Logik
+├─ etymology_graph.py         # Graphaufbau und PNG-Rendering
+├─ utils.py                   # Bild-/Schriftart-/Hilfsfunktionen
 ├─ templates/
-│  ├─ index.html                       # Main UI
-│  ├─ index.html.old                   # Legacy template variant
-│  └─ carousel_items.html
+│  ├─ index.html              # Haupt-Web-UI
+│  ├─ index.html.old          # Ältere Template-Variante
+│  └─ carousel_items.html     # Wiederverwendbares UI-Fragment
 ├─ static/
-│  └─ images/                          # Primary rendered PNG outputs
+│  └─ images/                 # Primäre Laufzeit-PNG-Ausgaben
 ├─ statics/
-│  └─ images/                          # Legacy duplicate image folder
-├─ jsons/                              # Per-word JSON and image artifacts
-├─ word_etymology_analysis/            # Timestamped model response cache
-├─ processed_words.csv                  # Processed word log
-├─ i18n/                               # Multilingual README/docs files
-├─ archived_code/                      # Historical notebooks/code
-├─ archived_data/                      # Historical JSON outputs
-├─ etymology*.ipynb                    # Notebook experiments
-├─ Noto Sans CJK Regular/              # Bundled CJK font
+│  └─ images/                 # Veralteter doppelter Bildordner
+├─ images/                    # Screenshot-/Demo-Dateien
+├─ jsons/                     # JSON pro Wort + gecachte Daten
+├─ word_etymology_analysis/   # Cache mit zeitgestempelten Modellantworten
+├─ processed_words.csv         # Index verarbeiteter Wörter
+├─ i18n/                      # Übersetzte README-Dateien
+├─ archived_code/             # Historische Notebooks und Skripte
+├─ archived_data/             # Historische JSON-Snapshots
+├─ Noto Sans CJK Regular/     # Gebündelte Schriftarten
 ├─ Noto_Sans/
-├─ Noto_Sans,Noto_Sans_Arabic/         # Bundled Arabic + Noto families
-└─ arial-unicode-ms.ttf                # Unicode-supporting font
+├─ Noto_Sans,Noto_Sans_Arabic/
+├─ arial-unicode-ms.ttf       # Gebündelte Unicode-Schriftart
+├─ etymology*.ipynb           # Entwicklungsnotebooks
+├─ LICENSE
+└─ .auto-readme-work/         # Pipeline-Artefakte
 ```
 
-<a id="prerequisites"></a>
 ## Voraussetzungen
 
 - Python 3.8+
-- OpenAI-API-Schlüssel
-- Erforderliche Schriften (im Repository enthalten):
-  - Noto Sans CJK Regular
-  - Noto Sans Arabic
-  - Arial Unicode MS
+- OpenAI API-Anmeldedaten:
+  - `OPENAI_API_KEY` (erforderlich)
+  - `OPENAI_MODEL` (optional, standardmäßig `gpt-4-0125-preview` nach bestehender Anleitung)
+- Schriftdateien im Repository, sofern Mehrsprachigkeit benötigt wird
 
-## Installation
+## 🧰 Installation
 
-### Einrichtung
+1. Repository klonen.
 
-1. Repository klonen:
    ```bash
    git clone https://github.com/lachlanchen/WordOrigins.git
    cd WordOrigins
    ```
 
-2. Abhängigkeiten installieren:
+2. Python-Umgebung erstellen und aktivieren (empfohlen).
+
    ```bash
-   pip install -r requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate
    ```
 
-3. OpenAI-API-Schlüssel als Umgebungsvariable setzen:
+3. Laufzeitbibliotheken installieren.
+
+   Da im Repository kein Root-Dependency-Manifest existiert, installieren Sie die bekannten Laufzeitanforderungen direkt:
+
+   ```bash
+   pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5
+   ```
+
+4. Zugangsdaten konfigurieren.
+
    ```bash
    export OPENAI_API_KEY=your_api_key_here
+   export OPENAI_MODEL=gpt-4-0125-preview   # optionale Überschreibung
    ```
 
-### Hinweise zu Abhängigkeiten
+## 🚀 Nutzung
 
-Der Code importiert diese Pakete zur Laufzeit:
+### Web-App starten
+
+```bash
+python app.py
+```
+
+Öffnen Sie `http://localhost:7788` im Browser.
+
+### Typischer Nutzerfluss
+
+1. Öffnen Sie `http://localhost:7788/word/etymology`.
+2. Geben Sie ein Wort ein.
+3. Warten Sie auf die Analyse (der erste Lauf kann wegen externer API-Latenz länger dauern).
+4. Erkunden Sie den generierten Graphen und zugehörige Metadaten.
+5. Nutzen Sie Vorwärts-/Rückwärts-Navigation, um zwischengespeicherte Wörter durchzublättern.
+
+### API-Endpunkte
+
+| Methode | Endpunkt | Beschreibung |
+|---|---|---|
+| `GET` | `/word/{word_to_analyze}` | Rendert eine Seite für die gewünschte Etymologie |
+| `GET` | `/word/next-word?word={word}` | Zum nächsten Wort im Cache navigieren |
+| `GET` | `/word/prev-word?word={word}` | Zum vorherigen Wort im Cache navigieren |
+| `GET/POST` | `/get_word_etymology/{word}` | Gibt einen JSON-Body mit Base64-PNG-Payload zurück |
+
+### Beispielhafte API-Aufrufe
+
+```bash
+curl "http://localhost:7788/word/etymology"
+curl "http://localhost:7788/word/next-word?word=etymology"
+curl "http://localhost:7788/word/prev-word?word=etymology"
+curl "http://localhost:7788/get_word_etymology/etymology"
+```
+
+## ⚙️ Konfiguration
+
+- `OPENAI_API_KEY` (erforderlich): Zugriffsdaten für Analyseanfragen.
+- `OPENAI_MODEL` (optional): Modellüberschreibung für den Analysator.
+- Laufzeitverzeichnisse, die vom Dienst genutzt werden:
+  - `jsons/`
+  - `static/images/`
+  - `word_etymology_analysis/`
+  - `processed_words.csv`
+
+## 🧪 Beispiele
+
+```bash
+python app.py
+```
+
+Danach öffnen Sie:
+
+```text
+http://localhost:7788/word/revolution
+```
+
+Artefakte, die bei der Erstanalyse erzeugt werden:
+
+- `jsons/revolution.json`
+- `static/images/revolution.png`
+- `word_etymology_analysis/revolution-<timestamp>.json`
+
+## Bestandteile
+
+### WordEtymologyAnalyzer
+
+In `word_etymology_analyzer.py` definiert, diese Komponente:
+
+- Normalisiert Eingabewörter.
+- Ruft OpenAI für strukturierte etymologische Antworten auf.
+- Extrahiert/ repariert JSON-Payloads mit `json5`.
+- Wiederholt fehlgeschlagene Parse-Versuche und protokolliert Fehler für Robustheit.
+- Schreibt zeitgestempelte Snapshots nach `word_etymology_analysis/`.
+- Aktualisiert den `processed_words.csv`-Index.
+
+### EtymologyGraph
+
+In `etymology_graph.py` definiert, diese Komponente:
+
+- Lädt strukturierte etymologische JSON-Daten.
+- Erstellt einen `networkx.DiGraph` mit rekursiven Abstammungsbeziehungen.
+- Berechnet tiefenbasierte Graph-Koordinaten.
+- Rendert beschriftete Knoten und Kanten mit mehrsprachiger Textbehandlung.
+- Speichert `PNG`-Bilder für Caching und Darstellung.
+
+### Webanwendung
+
+In `app.py`, die Tornado-App:
+
+- Verarbeitet Root-Weiterleitung und Suchseiten-Verhalten.
+- Handhabt Erstellungs- und Cache-Lookup-Workflows.
+- Stellt Seiten- und API-Routen unter `/word/...` und `/get_word_etymology/...` bereit.
+- Gibt JSON-Payloads mit Base64-Bilddaten für API-Verbraucher zurück.
+
+## 📦 Abhängigkeiten
+
 - `tornado`
 - `openai`
 - `matplotlib`
@@ -134,180 +242,53 @@ Der Code importiert diese Pakete zur Laufzeit:
 - `cjkwrap`
 - `json5`
 
-Annahme: In `requirements.txt` sollten die oben genannten Pakete enthalten sein. Wenn `requirements.txt` in deiner lokalen Kopie fehlt, installiere diese manuell.
+## 🧱 Entwicklungshinweise
 
-## Nutzung
+- JSON- und Bild-Caching verhindert unnötig wiederholte API-Aufrufe.
+- `index.html` und `index.html.old` werden aus Kompatibilitäts-/Historiegründen beibehalten.
+- Legacy-Verzeichnisse und Artefakte sind derzeit bewusst vorhanden (`statics/`, Notebooks, Archive).
+- Eine `.gitignore`-Datei mit Merge-Konfliktmarkierungen wurde als übergeordnetes Hygiene-Problem außerhalb des README-Kontexts festgestellt.
 
-### Starten der Webanwendung
-
-Starte den Tornado-Webserver:
-
-```bash
-python app.py
-```
-
-Öffne anschließend deinen Browser und navigiere zu `http://localhost:7788`.
-
-### Typischer Benutzungsablauf
-
-1. Öffne `http://localhost:7788`.
-2. Gib ein Wort in das Suchfeld ein.
-3. Die App analysiert und rendert den Etymologie-Graphen.
-4. Nutze die Steuerung Vorherige/Nächste, um zwischen generierten Wörtern zu wechseln.
-
-<a id="api-endpoints"></a>
-### API-Endpunkte
-
-| Methode | Endpunkt | Beschreibung |
-|---|---|---|
-| `GET` | `/word/{word_to_analyze}` | Erzeugt und zeigt den Etymologiegraphen für ein Wort |
-| `GET` | `/word/next-word` | Zum nächsten Wort in der Liste wechseln |
-| `GET` | `/word/prev-word` | Zum vorherigen Wort in der Liste wechseln |
-| `GET/POST` | `/get_word_etymology/{word}` | API-Endpunkt für Etymologiedaten als Base64-PNG-Payload |
-
-### Beispielhafte API-Aufrufe
-
-```bash
-# Ein Wort im Browser erzeugen/anzeigen
-curl "http://localhost:7788/word/etymology"
-
-# Base64-Bild-Payload abrufen
-curl "http://localhost:7788/get_word_etymology/etymology"
-```
-
-## Konfiguration
-
-### Umgebungsvariablen
-
-- `OPENAI_API_KEY` (erforderlich): API-Schlüssel, der vom OpenAI-Python-Client verwendet wird
-- `OPENAI_MODEL` (optional): Modellname, den der Analyzer nutzt (Standard: `gpt-4-0125-preview`)
-
-### Laufzeitverzeichnisse, die von der App erstellt/verwendet werden
-
-- `jsons/`
-- `static/images/`
-- `word_etymology_analysis/`
-- `processed_words.csv`
-
-## Komponenten
-
-### WordEtymologyAnalyzer
-
-Verbindet sich mit der API von OpenAI, um für ein angegebenes Wort detaillierte Etymologieinformationen zu erhalten. Enthält Caching- und Wiederholungslogik:
-
-- Setzt Eingabewörter in Kleinbuchstaben und normalisiert sie
-- Versucht, JSON-Ausgaben robust zu parsen (`json5`)
-- Speichert zeitgestempelte Analyse-Snapshots in `word_etymology_analysis/`
-- Protokolliert verarbeitete Wörter in `processed_words.csv`
-
-<a id="etymologygraph"></a>
-### EtymologyGraph
-
-Erstellt visuelle Darstellungen von Etymologiedaten mit NetworkX und Matplotlib:
-
-- Bildet verschachtelte Etymologie rekursiv in gerichtete Graph-Knoten und -Kanten ab
-- Berechnet eine tiefenbasierte radiale Positionierung
-- Zeichnet Knoten-/Bedeutungs-/Beispielbeschriftungen sowie Sprach-Kantenbeschriftungen
-- Unterstützt mehrsprachiges Text-Rendering mit den mitgelieferten Schriftarten
-
-### Webanwendung
-
-Ein Tornado-basierter Webserver, der Anfragen verarbeitet und die Benutzeroberfläche bereitstellt:
-
-- Leitet `/` nach `/word/etymology` weiter
-- Rendert Wortgraphen aus `static/images/`
-- Erzeugt bei Bedarf fehlende Analysen/Bilder
-
-## Beispiele
-
-### Ein neues Wort analysieren
-
-```bash
-python app.py
-# then open http://localhost:7788/word/revolution
-```
-
-Erwartete Ausgaben nach dem ersten Lauf:
-
-- `jsons/revolution.json`
-- `static/images/revolution.png`
-- `word_etymology_analysis/revolution-<timestamp>.json`
-
-### Bestehende generierte Wörter durchsuchen
-
-```text
-http://localhost:7788/word/next-word?word=etymology
-http://localhost:7788/word/prev-word?word=etymology
-```
-
-## Technische Details
-
-- Die Anwendung speichert JSON-Dateien analysierter Wörter zum Caching.
-- Bilder werden als PNG-Dateien erzeugt.
-- Spezielle Schriftverarbeitung ist für die Mehrsprachigkeit implementiert.
-- Das Graph-Layout wird anhand von Knotentiefe und Beziehungen berechnet.
-- Das bestehende Repository enthält explorative Notebooks und archivierte Artefakte aus der Entwicklung.
-
-## Entwicklungsnotizen
-
-- Primärer Laufzeiteinstiegspunkt ist `app.py`.
-- Notebook-Dateien (`etymology*.ipynb`) sind experimentell und können vom Produktionsfluss des Servers abweichen.
-- Es gibt Legacy-/Doppelpfade (`statics/` vs `static/`, `.old`-Dateien), die aus historischem Kontext erhalten wurden.
-- Die aktuelle `.gitignore` scheint ungelöste Merge-Conflict-Marker zu enthalten; bereinige dies vor der Release-Paketierung.
-
-## Fehlerbehebung
+## 🧯 Fehlerbehebung
 
 | Problem | Lösung |
 |---|---|
-| `ModuleNotFoundError` beim Start | Fehlende Abhängigkeiten installieren: `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
-| `OPENAI_API_KEY`-Fehler oder Authentifizierungsfehler | Stelle sicher, dass `OPENAI_API_KEY` in derselben Shell-Sitzung exportiert ist, in der du `python app.py` startest |
-| Graph-Text wird als Kästchen angezeigt oder Glyphe fehlen | Stelle sicher, dass die mitgelieferten Schriftdateien an den erwarteten Repository-Pfaden vorhanden sind |
-| Für ein Wort wird kein Bild erstellt | Prüfe die Server-Logs auf JSON-Parse-Wiederholungsversuche/Ausnahmen und prüfe Netzwerk-/API-Zugriff |
-| `pip install -r requirements.txt` schlägt fehl, da die Datei fehlt | Erstelle eine lokale Abhängigkeitsdatei aus der Paketliste in dieser README oder installiere die Pakete direkt |
+| `ModuleNotFoundError` beim Start | Fehlende Pakete mit `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` installieren |
+| Authentifizierungsfehler bei `OPENAI_API_KEY` | Stellen Sie sicher, dass die Variable im selben Shell-Session-Kontext exportiert ist, in dem `python app.py` läuft |
+| Fehlende/verzerrte Glyphen in generierten Graphen | Vergewissern Sie sich, dass gebündelte Schriften (`Noto Sans`, Arabisch-Varianten, Arial Unicode MS) vorhanden und lesbar sind |
+| Kein Bild für ein Wort vorhanden | Prüfen Sie die App-Logs auf JSON-Parsing-Fehler oder vorübergehende API-Fehler |
+| `pip install -r requirements.txt` schlägt fehl/existiert nicht | Abhängigkeiten direkt wie oben installieren (aktuelles Repo enthält kein Root-Manifest) |
+
+## 🗺️ Roadmap
+
+- Unterstützung für weitere Sprachen hinzufügen.
+- Nutzerkonten für bevorzugte Etymologien ergänzen.
+- Graph-Navigation um Zoom-/Pan-Interaktionen verbessern.
+- Sprachliche Metadaten in jedem Graphknoten anreichern.
+- Ein gepflegtes Abhängigkeitsmanifest und reproduzierbaren Umgebungspaketaufbau ergänzen.
+- Tests für Analyzer-Parsing, Cache-Verhalten und Routenhandler hinzufügen.
+
+## 🤝 Beitrag
+
+1. Forken Sie das Repository.
+2. Erstellen Sie einen Feature-Branch.
+3. Nehmen Sie fokussierte, prüfbare Änderungen vor.
+4. Validieren Sie die Änderungen mit `python app.py` und prüfen Sie die wichtigsten Routen.
+5. Öffnen Sie eine PR mit reproduzierbaren Anweisungen sowie Screenshots/API-Beispielen.
+
+## 🙌 Danksagungen
+
+- OpenAI für analysefähige Sprachmodell-Funktionalität.
+- Mitwirkenden der Google Noto Font-Familie für mehrsprachiges Rendering.
+
+## Lizenz
+
+Apache License 2.0  
+Siehe [LICENSE](LICENSE) für die vollständigen Bedingungen.
+
 
 ## ❤️ Support
 
 | Donate | PayPal | Stripe |
-|---|---|---|
-| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
-
-## Roadmap
-
-- Unterstützung für weitere Sprachen hinzufügen.
-- Benutzerkonten implementieren, um bevorzugte Etymologien zu speichern.
-- Graph-Visualisierung mit Zoom und Schwenken verbessern.
-- Detailliertere linguistische Informationen hinzufügen.
-- Ein gepflegtes Abhängigkeits-Manifest und eine reproduzierbare Umgebungskonfiguration ergänzen.
-- Tests für Analyzer-Parsing, Cache-Verhalten und Route-Handler ergänzen.
-
-## Beitrag
-
-Beiträge sind willkommen. Vorgeschlagener Workflow:
-
-1. Fork des Repositorys erstellen.
-2. Einen Feature-Branch anlegen.
-3. Konzentrierte, reviewbare Änderungen vornehmen.
-4. Validiere durch Ausführen von `python app.py` und Überprüfung zentraler Routen.
-5. Eröffne einen Pull Request mit einer klaren Beschreibung und bei Relevanz Screenshots/API-Beispiele.
-
-## Abhängigkeiten
-
-- tornado: Webserver-Framework
-- openai: OpenAI API-Client
-- matplotlib: Zum Erzeugen von Diagrammen
-- networkx: Für die Graph-Datenstruktur
-- PIL/Pillow: Für die Bildverarbeitung
-- numpy: Für numerische Operationen
-- cjkwrap: Für den Umgang mit Zeilenumbrüchen in CJK-Texten
-- json5: Für robustes JSON-Parsing
-
-## Danksagungen
-
-- OpenAI für die bereitgestellte linguistische Analysefunktionalität
-- Google Noto-Schriften für die mehrsprachige Textunterstützung
-
-## Lizenz
-
-Apache License 2.0
-
-Siehe [LICENSE](LICENSE) für die vollständigen Bedingungen.
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |

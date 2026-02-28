@@ -1,127 +1,238 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-**Language options:** 한국어 (이 파일)
-
 [![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
 
 # WordOrigins
 
-단어의 어원(기원과 역사적 전개)을 분석하고 대화형 그래프로 시각화하는 도구입니다.
+> 🎯 OpenAI 기반의 캐시 친화형 워크플로우로 단어의 어원을 다국어 계보 그래프로 시각화합니다.
+
+**언어 옵션:** 한국어 (이 파일)
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#prerequisites)
-[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#overview)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#components)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](#license)
 [![API](https://img.shields.io/badge/API-REST-orange)](#api-endpoints)
 [![Graph](https://img.shields.io/badge/Visualization-NetworkX%20%2B%20Matplotlib-1f6feb)](#etymologygraph)
 [![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#features)
+[![GitHub last commit](https://img.shields.io/github/last-commit/lachlanchen/WordOrigins?color=blue)](https://github.com/lachlanchen/WordOrigins/commits/main)
+[![GitHub issues](https://img.shields.io/github/issues/lachlanchen/WordOrigins?color=red)](https://github.com/lachlanchen/WordOrigins/issues)
+[![GitHub repo size](https://img.shields.io/github/repo-size/lachlanchen/WordOrigins?color=yellow)](https://github.com/lachlanchen/WordOrigins)
 
 ![Word Origins Demo](word_origins.jpg)
 
-## 빠른 개요
+## 📘 개요
 
-| 항목 | 세부 사항 |
+WordOrigins는 단어의 어원을 분석하고, 언어 계보를 방향성 그래프로 시각화하는 Python 웹 유틸리티입니다. 다음을 결합합니다.
+
+- Tornado 웹 애플리케이션
+- OpenAI 기반의 어원 분석
+- 장애 내성이 있는 구조화 JSON 파싱
+- NetworkX + Matplotlib 기반 그래프 생성
+- 빠른 반복 분석을 위한 캐시 출력
+
+브라우저 인터페이스와 API 엔드포인트를 모두 제공해 어원 아티팩트를 생성하고 조회할 수 있습니다.
+
+## 📸 빠른 스냅샷
+
+| 영역 | 세부 정보 |
 |---|---|
-| 🌐 접근 | 대화형 탐색을 위한 웹 UI와 Base64 PNG 출력을 제공하는 API |
-| 🧠 지능 | 구조화된 JSON 파싱을 포함한 OpenAI 기반 어원 분석 |
-| 🧰 재현성 | 처리된 각 단어에 대해 타임스탬프 JSON 및 PNG 산출물을 캐시 |
-| 🌍 언어 지원 | 저장소에 포함된 CJK 및 아랍어 폰트로 다국어 렌더링 |
-
-## 개요
-
-WordOrigins는 단어의 어원(기원과 역사적 변화)을 탐색할 수 있게 해주는 Python 웹 애플리케이션입니다. 시간이 흐르며 단어가 어떻게 발전했는지에 대한 자세한 분석을 제공하고, 단어를 구성 요소로 분해한 뒤 각 요소의 언어적 계보를 재귀적으로 추적해 결과를 브라우저에서 볼 수 있는 그래프 이미지로 렌더링합니다.
-
-### ✨ 주요 기능
-
-- 임의의 단어에 대한 상세한 어원 분석
-- 단어 기원의 시각적 그래프 표현
-- 영어, 프랑스어, 아랍어, 일본어, 중국어를 포함한 다국어 지원
-- 탐색을 위한 대화형 웹 인터페이스
+| 🌐 접근성 | 대화형 탐색이 가능한 웹 UI와 Base64 PNG 출력을 반환하는 API |
+| 🧠 지능형 분석 | OpenAI 기반 어원 분석과 구조화 JSON 파싱 |
+| 🧰 재현성 | 처리된 각 단어에 대해 JSON + PNG 아티팩트 캐시 |
+| 🌍 언어 지원 | 번들 폰트로 CJK 및 아랍어 다국어 렌더링 |
 
 ## 기능
 
-| 기능 | 세부 사항 |
+| 기능 | 세부 정보 |
 |---|---|
 | 🔎 웹 UI | 생성된 어원 그래프를 검색하고 탐색 |
-| 🧠 OpenAI 기반 분석 | OpenAI API를 사용해 구조화된 어원 분석 결과 생성 |
-| 💾 캐싱 | OpenAI 응답을 타임스탬프 JSON 스냅샷으로 캐시 |
-| 🖼️ 산출물 생성 | 이전 분석 단어에 대한 JSON과 PNG 산출물을 캐시 |
-| 🌍 다국어 렌더링 | 저장소에 포함된 CJK + 아랍어 폰트 지원 |
-| ↔️ 탐색 | 생성된 단어 이미지 사이를 이전/다음으로 이동 |
-| 🔌 API 지원 | 엔드포인트가 PNG 결과를 Base64로 반환 |
+| 🧠 OpenAI 기반 분석 | OpenAI API를 사용해 구조화된 어원 결과 생성 |
+| 💾 캐싱 | 타임스탬프가 포함된 JSON 스냅샷을 저장 |
+| 🖼️ 아티팩트 생성 | 처리된 단어의 JSON 및 PNG 아티팩트 내보내기 |
+| 🌍 다국어 렌더링 | 저장소에 번들된 CJK + 아랍어 폰트 지원 |
+| ↔️ 탐색 | 생성된 단어 이미지 간 이전/다음 이동 |
+| 🔌 API 지원 | PNG 출력을 base64 JSON 페이로드로 반환하는 엔드포인트 |
 
-## 동작 방식
+## 🛠️ 작동 방식
 
-1. 분석할 단어를 입력합니다.
-2. 시스템이 OpenAI API에 연결해 깊은 어원 분석을 수행합니다.
-3. 분석기가 모델 출력을 검증/파싱해 구조화된 JSON으로 변환합니다.
-4. 결과를 캐시한 뒤 방향성 그래프로 변환합니다.
-5. 그래프를 PNG로 렌더링해 웹 인터페이스에 표시합니다.
-6. 이전에 분석된 단어를 이어서 탐색할 수 있습니다.
+1. 사용자가 `/word/{word}` 또는 웹 검색 폼을 통해 단어를 제출합니다.
+2. 분석기가 OpenAI를 호출해 응답 구조를 검증합니다.
+3. 파싱된 데이터는 정규화되어 캐시 재사용용으로 저장됩니다.
+4. 어원 관계가 그래프의 노드/엣지로 변환됩니다.
+5. NetworkX와 Matplotlib이 방향성 그래프를 PNG로 렌더링합니다.
+6. UI와 API가 캐시된 이미지 경로 및 관련 메타데이터를 제공합니다.
 
-## 프로젝트 구조
+## 🗂️ 프로젝트 구조
 
 ```text
 WordOrigins/
-├─ README.md
-├─ LICENSE
-├─ app.py                              # Tornado 웹 서버 진입점
-├─ word_etymology_analyzer.py          # OpenAI 기반 어원 분석 + 캐싱
-├─ etymology_graph.py                  # NetworkX + Matplotlib 그래프 생성
-├─ utils.py                            # 이미지/텍스처 유틸리티
+├─ app.py                     # Tornado web app (current entrypoint)
+├─ app.py.old                 # Legacy app variant
+├─ word_etymology_analyzer.py # OpenAI-backed analysis + retry/caching logic
+├─ etymology_graph.py         # Graph building and PNG rendering
+├─ utils.py                   # Image/font/image helper utilities
 ├─ templates/
-│  ├─ index.html                       # 메인 UI
-│  ├─ index.html.old                   # 기존 템플릿 변형
-│  └─ carousel_items.html
+│  ├─ index.html              # Main web UI
+│  ├─ index.html.old          # Legacy template variant
+│  └─ carousel_items.html     # Reusable UI fragment
 ├─ static/
-│  └─ images/                          # 기본 렌더링 PNG 출력
+│  └─ images/                 # Primary runtime PNG outputs
 ├─ statics/
-│  └─ images/                          # 레거시 중복 이미지 폴더
-├─ jsons/                              # 단어별 JSON 및 이미지 산출물
-├─ word_etymology_analysis/            # 타임스탬프 기반 모델 응답 캐시
-├─ processed_words.csv                 # 처리된 단어 로그
-├─ i18n/                               # 다국어 README/문서 파일
-├─ archived_code/                      # 과거 노트북/코드
-├─ archived_data/                      # 과거 JSON 출력물
-├─ etymology*.ipynb                    # 노트북 실험
-├─ Noto Sans CJK Regular/              # 번들된 CJK 폰트
+│  └─ images/                 # Legacy duplicate image folder
+├─ images/                    # Screenshot/demo assets
+├─ jsons/                     # Per-word generated JSON + cached data
+├─ word_etymology_analysis/   # Timestamped model response cache
+├─ processed_words.csv         # Processed word index
+├─ i18n/                      # Translated README files
+├─ archived_code/             # Historical notebooks and scripts
+├─ archived_data/             # Historical JSON snapshots
+├─ Noto Sans CJK Regular/     # Bundled font assets
 ├─ Noto_Sans/
-├─ Noto_Sans,Noto_Sans_Arabic/         # 번들된 아랍어 + Noto 폰트군
-└─ arial-unicode-ms.ttf                # 유니코드 지원 폰트
+├─ Noto_Sans,Noto_Sans_Arabic/
+├─ arial-unicode-ms.ttf       # Bundled Unicode font
+├─ etymology*.ipynb           # Development notebooks
+├─ LICENSE
+└─ .auto-readme-work/         # Pipeline artifacts
 ```
 
 ## 필수 조건
 
 - Python 3.8+
-- OpenAI API 키
-- 필수 폰트(저장소에 포함됨):
-  - Noto Sans CJK Regular
-  - Noto Sans Arabic
-  - Arial Unicode MS
+- OpenAI API 자격 증명:
+  - `OPENAI_API_KEY` (필수)
+  - `OPENAI_MODEL` (선택, 기본값은 기존 가이드에 따라 `gpt-4-0125-preview`)
+- 다국어 렌더링이 필요할 경우 저장소에 포함된 폰트 파일
 
-## 설치
+## 🧰 설치
 
-### 설정
+1. 저장소를 클론합니다.
 
-1. 저장소 복제:
    ```bash
    git clone https://github.com/lachlanchen/WordOrigins.git
    cd WordOrigins
    ```
 
-2. 의존성 설치:
+2. Python 가상 환경을 만들고 활성화합니다(권장).
+
    ```bash
-   pip install -r requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate
    ```
 
-3. OpenAI API 키를 환경 변수로 설정:
+3. 런타임 라이브러리를 설치합니다.
+
+   이 저장소에는 루트 의존성 매니페스트가 없으므로, 알려진 실행 요구사항을 직접 설치하세요.
+
+   ```bash
+   pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5
+   ```
+
+4. 자격 증명을 설정합니다.
+
    ```bash
    export OPENAI_API_KEY=your_api_key_here
+   export OPENAI_MODEL=gpt-4-0125-preview   # optional override
    ```
 
-### 의존성 참고
+## 🚀 사용법
 
-실행 시 다음 패키지를 import합니다:
+### 웹 앱 실행
+
+```bash
+python app.py
+```
+
+브라우저에서 `http://localhost:7788`을 엽니다.
+
+### 일반적인 사용자 흐름
+
+1. `http://localhost:7788/word/etymology`를 엽니다.
+2. 단어를 입력합니다.
+3. 분석을 기다립니다. (최초 실행은 외부 API 지연으로 시간이 더 걸릴 수 있음)
+4. 생성된 그래프와 메타데이터를 확인합니다.
+5. 다음/이전 탐색으로 캐시 단어를 둘러봅니다.
+
+### API 엔드포인트
+
+| 메서드 | 엔드포인트 | 설명 |
+|---|---|---|
+| `GET` | `/word/{word_to_analyze}` | 요청한 단어의 어원 페이지 렌더링 |
+| `GET` | `/word/next-word?word={word}` | 캐시에서 다음 단어로 이동 |
+| `GET` | `/word/prev-word?word={word}` | 캐시에서 이전 단어로 이동 |
+| `GET/POST` | `/get_word_etymology/{word}` | base64 PNG 페이로드가 포함된 JSON 반환 |
+
+### API 호출 예시
+
+```bash
+curl "http://localhost:7788/word/etymology"
+curl "http://localhost:7788/word/next-word?word=etymology"
+curl "http://localhost:7788/word/prev-word?word=etymology"
+curl "http://localhost:7788/get_word_etymology/etymology"
+```
+
+## ⚙️ 설정
+
+- `OPENAI_API_KEY` (필수): 분석 요청용 자격 증명.
+- `OPENAI_MODEL` (선택): 분석기에서 사용할 모델 오버라이드.
+- 서비스에서 사용하는 런타임 디렉터리:
+  - `jsons/`
+  - `static/images/`
+  - `word_etymology_analysis/`
+  - `processed_words.csv`
+
+## 🧪 예시
+
+```bash
+python app.py
+```
+
+다음 주소를 엽니다:
+
+```text
+http://localhost:7788/word/revolution
+```
+
+최초 분석에서 생성되는 아티팩트:
+
+- `jsons/revolution.json`
+- `static/images/revolution.png`
+- `word_etymology_analysis/revolution-<timestamp>.json`
+
+## Components
+
+### WordEtymologyAnalyzer
+
+`word_etymology_analyzer.py`에 구현된 이 컴포넌트는 다음 작업을 수행합니다.
+
+- 입력 단어를 정규화합니다.
+- OpenAI를 호출해 구조화된 어원 응답을 생성합니다.
+- `json5`를 사용해 JSON 페이로드를 추출/복구합니다.
+- 파싱 실패를 재시도하고 복원력 강화를 위해 실패 이력을 기록합니다.
+- `word_etymology_analysis/`에 타임스탬프가 포함된 스냅샷을 기록합니다.
+- `processed_words.csv` 인덱스를 업데이트합니다.
+
+### EtymologyGraph
+
+`etymology_graph.py`에 구현된 이 컴포넌트는 다음 작업을 수행합니다.
+
+- 구조화된 어원 JSON을 로드합니다.
+- 재귀적 조상 관계로 `networkx.DiGraph`를 구성합니다.
+- 깊이를 반영한 그래프 좌표를 계산합니다.
+- 다국어 텍스트 처리와 함께 라벨이 있는 노드/엣지를 렌더링합니다.
+- 캐시 및 표시용 `PNG` 이미지를 저장합니다.
+
+### 웹 애플리케이션
+
+`app.py`의 Tornado 앱은:
+
+- 루트 리디렉션 및 검색 페이지 동작을 처리합니다.
+- 생성 및 캐시 조회 워크플로우를 처리합니다.
+- `/word/...` 및 `/get_word_etymology/...` 경로의 페이지/API 라우트를 노출합니다.
+- API 소비자를 위해 base64 이미지 데이터를 포함한 JSON 페이로드를 반환합니다.
+
+## 📦 의존성
+
 - `tornado`
 - `openai`
 - `matplotlib`
@@ -131,178 +242,53 @@ WordOrigins/
 - `cjkwrap`
 - `json5`
 
-가정: `requirements.txt`에는 위 패키지가 포함되어 있어야 합니다. 로컬 복사본에 `requirements.txt`가 없으면 수동으로 설치하세요.
+## 🧱 개발 노트
 
-## 사용법
+- JSON 및 이미지 캐싱으로 불필요한 반복 API 호출을 줄입니다.
+- `index.html`과 `index.html.old`는 호환성과 이력 유지를 위해 유지됩니다.
+- 레거시 디렉터리와 산출물(`statics/`, 노트북, 아카이브)이 현재 의도적으로 유지되어 있습니다.
+- 병합 충돌 마커가 포함된 `.gitignore`는 README 범위를 벗어난 상위 저장소 관리 이슈입니다.
 
-### 웹 애플리케이션 실행
-
-Tornado 웹 서버 시작:
-
-```bash
-python app.py
-```
-
-그다음 브라우저에서 `http://localhost:7788`로 이동합니다.
-
-### 일반 사용자 흐름
-
-1. `http://localhost:7788`를 엽니다.
-2. 검색창에 단어를 입력합니다.
-3. 앱이 어원 그래프를 분석해 렌더링합니다.
-4. 이전/다음 컨트롤을 사용해 생성된 단어를 탐색합니다.
-
-### API 엔드포인트
-
-| 메서드 | 엔드포인트 | 설명 |
-|---|---|---|
-| `GET` | `/word/{word_to_analyze}` | 단어의 어원 그래프 생성 및 표시 |
-| `GET` | `/word/next-word` | 목록에서 다음 단어로 이동 |
-| `GET` | `/word/prev-word` | 목록에서 이전 단어로 이동 |
-| `GET/POST` | `/get_word_etymology/{word}` | 어원 데이터를 Base64 PNG payload로 반환하는 API 엔드포인트 |
-
-### API 호출 예시
-
-```bash
-# 브라우저에서 단어 생성/조회
-curl "http://localhost:7788/word/etymology"
-
-# Base64 이미지 payload 가져오기
-curl "http://localhost:7788/get_word_etymology/etymology"
-```
-
-## 구성
-
-### 환경 변수
-
-- `OPENAI_API_KEY` (필수): OpenAI Python 클라이언트가 사용하는 API 키
-- `OPENAI_MODEL` (선택): 분석기에 사용되는 모델 이름(기본값 `gpt-4-0125-preview`)
-
-### 앱에서 생성/사용되는 런타임 디렉터리
-
-- `jsons/`
-- `static/images/`
-- `word_etymology_analysis/`
-- `processed_words.csv`
-
-## 구성 요소
-
-### WordEtymologyAnalyzer
-
-지정한 단어의 상세 어원 정보를 얻기 위해 OpenAI API에 연결합니다. 캐싱 및 재시도 로직을 포함합니다:
-
-- 입력 단어를 소문자로 정규화
-- JSON 출력을 `json5`로 강건하게 파싱 시도
-- `word_etymology_analysis/`에 타임스탬프 분석 스냅샷 저장
-- `processed_words.csv`에 처리된 단어 기록
-
-### EtymologyGraph
-
-NetworkX와 Matplotlib을 사용해 어원 데이터를 시각화합니다:
-
-- 중첩된 어원을 재귀적으로 방향성 그래프의 노드/엣지로 매핑
-- 깊이 기반 방사형 배치 계산
-- 구성 요소/의미/예시 및 언어 엣지 라벨 렌더링
-- 번들 폰트로 다국어 텍스트 렌더링 처리
-
-### 웹 애플리케이션
-
-요청을 처리하고 사용자 인터페이스를 제공하는 Tornado 기반 웹 서버:
-
-- `/`를 `/word/etymology`로 리다이렉트
-- `static/images/`에서 단어 그래프 렌더링
-- 누락된 분석/이미지를 필요 시 생성
-
-## 예시
-
-### 새 단어 분석
-
-```bash
-python app.py
-# 그런 다음 http://localhost:7788/word/revolution 열기
-```
-
-최초 실행 후 예상 출력:
-
-- `jsons/revolution.json`
-- `static/images/revolution.png`
-- `word_etymology_analysis/revolution-<timestamp>.json`
-
-### 기존 생성 단어 탐색
-
-```text
-http://localhost:7788/word/next-word?word=etymology
-http://localhost:7788/word/prev-word?word=etymology
-```
-
-## 기술 세부 정보
-
-- 앱은 분석된 단어의 JSON 파일을 캐싱 용도로 저장합니다.
-- 이미지는 PNG 파일로 생성됩니다.
-- 다국어 지원을 위해 특수 폰트 처리 로직이 구현되어 있습니다.
-- 그래프 레이아웃은 노드 깊이와 관계에 기반해 계산됩니다.
-- 현재 저장소에는 개발 중 사용된 실험용 노트북과 보관된 산출물이 포함되어 있습니다.
-
-## 개발 노트
-
-- 기본 런타임 진입점은 `app.py`입니다.
-- 노트북 파일(`etymology*.ipynb`)은 실험용이며 실제 서버 흐름과 다를 수 있습니다.
-- 레거시/중복 경로(`statics/` 대비 `static/`, `.old` 파일)는 역사적 맥락 유지를 위해 보존됩니다.
-- 현재 `.gitignore`에 해결되지 않은 병합 충돌 마커가 남아 있는 것으로 보이므로 릴리스 패키징 전에 정리해야 합니다.
-
-## 문제 해결
+## 🧯 문제 해결
 
 | 문제 | 해결 방법 |
 |---|---|
-| 시작 시 `ModuleNotFoundError` 발생 | 누락된 의존성을 설치: `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
-| `OPENAI_API_KEY` 오류 또는 인증 실패 | `python app.py`를 실행하는 동일한 셸 세션에서 `OPENAI_API_KEY`가 export되었는지 확인 |
-| 그래프 텍스트가 네모(□)로 표시되거나 글리프가 누락됨 | 번들 폰트 파일이 저장소의 예상 경로에 있는지 확인 |
-| 단어 이미지가 생성되지 않음 | 서버 로그에서 JSON 파싱 재시도/예외를 확인하고 네트워크/API 접근을 점검 |
-| `pip install -r requirements.txt` 실행 실패(파일 없음) | 이 README의 패키지 목록으로 로컬 의존성 파일을 만들거나 패키지를 직접 설치 |
+| 시작 시 `ModuleNotFoundError` 발생 | `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5`로 누락 패키지 설치 |
+| `OPENAI_API_KEY` 인증 오류 | `python app.py`를 실행하는 동일한 셸 세션에서 변수가 export되었는지 확인 |
+| 생성된 그래프에서 글꼴/문자가 깨지거나 누락됨 | 번들 폰트(`Noto Sans`, 아랍어 폰트 변형, `Arial Unicode MS`)가 존재하고 읽을 수 있는지 확인 |
+| 단어에 이미지가 나타나지 않음 | 앱 로그에서 JSON 파싱 실패나 일시적 API 오류를 확인 |
+| `pip install -r requirements.txt` 실패/존재하지 않음 | 현재 레포지토리에 루트 매니페스트가 없으므로 위 의존성 패키지를 직접 설치 |
+
+## 🗺️ 로드맵
+
+- 추가 언어 지원
+- 즐겨찾기 어원을 위한 사용자 계정 추가
+- 줌/팬 방식 상호작용으로 그래프 탐색 개선
+- 각 그래프 노드의 언어 메타데이터 강화
+- 유지되는 의존성 매니페스트 및 재현 가능한 환경 구성 추가
+- 분석기 파싱, 캐시 동작, 라우트 핸들러에 대한 테스트 추가
+
+## 🤝 기여
+
+1. 저장소를 포크합니다.
+2. 기능 브랜치를 생성합니다.
+3. 집중적이고 리뷰 가능한 변경을 만듭니다.
+4. `python app.py`를 실행해 핵심 라우트를 검증합니다.
+5. 재현 가능한 실행 방법과 스크린샷/API 예시를 포함해 PR을 제출합니다.
+
+## 🙌 감사
+
+- OpenAI: 언어 모델 기반 분석 기능 제공.
+- Google Noto 폰트 패밀리 기여자: 다국어 렌더링 지원.
+
+## 라이선스
+
+Apache License 2.0  
+자세한 내용은 [LICENSE](LICENSE)를 참고하세요.
+
 
 ## ❤️ Support
 
 | Donate | PayPal | Stripe |
-|---|---|---|
-| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
-
-## 로드맵
-
-- 더 많은 언어 지원 추가
-- 즐겨찾는 어원을 저장할 수 있는 사용자 계정 구현
-- 줌/팬 기능을 가진 그래프 시각화 개선
-- 더 상세한 언어학 정보 추가
-- 유지 보수 가능한 의존성 매니페스트와 재현 가능한 환경 구성 추가
-- 분석기 파싱, 캐싱 동작, 라우트 핸들러에 대한 테스트 추가
-
-## 기여
-
-기여를 환영합니다. 권장 워크플로우:
-
-1. 저장소를 포크합니다.
-2. 기능 브랜치를 만듭니다.
-3. 집중되고 검토 가능한 변경을 수행합니다.
-4. `python app.py`를 실행해 주요 라우트를 확인하며 검증합니다.
-5. 필요 시 명확한 설명과 스크린샷/API 샘플과 함께 Pull Request를 만듭니다.
-
-## 의존성
-
-- tornado: 웹 서버 프레임워크
-- openai: OpenAI API 클라이언트
-- matplotlib: 그래프 생성용
-- networkx: 그래프 데이터 구조 처리
-- PIL/Pillow: 이미지 처리
-- numpy: 수치 연산
-- cjkwrap: CJK 텍스트 줄 바꿈 처리
-- json5: 안정적인 JSON 파싱
-
-## 감사의 글
-
-- 언어 분석 기능을 제공하는 OpenAI
-- 다국어 텍스트 지원을 위한 Google Noto 폰트
-
-## 라이선스
-
-Apache License 2.0
-
-자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |

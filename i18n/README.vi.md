@@ -1,127 +1,238 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-**Tùy chọn ngôn ngữ:** Tiếng Việt (tệp này)
-
 [![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
 
 # WordOrigins
 
-Một công cụ để phân tích từ nguyên của từ ngữ và trực quan hóa chúng dưới dạng đồ thị tương tác.
+> 🎯 Trực quan hóa nguồn gốc từ vựng như một đồ thị phả hệ ngôn ngữ bằng quy trình hướng cache, có hỗ trợ bởi OpenAI.
+
+**Tùy chọn ngôn ngữ:** English (this file)
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#prerequisites)
-[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#overview)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![Framework](https://img.shields.io/badge/framework-Tornado-5C2D91)](#components)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](#license)
 [![API](https://img.shields.io/badge/API-REST-orange)](#api-endpoints)
 [![Graph](https://img.shields.io/badge/Visualization-NetworkX%20%2B%20Matplotlib-1f6feb)](#etymologygraph)
 [![i18n](https://img.shields.io/badge/i18n-multilingual-success)](#features)
+[![GitHub last commit](https://img.shields.io/github/last-commit/lachlanchen/WordOrigins?color=blue)](https://github.com/lachlanchen/WordOrigins/commits/main)
+[![GitHub issues](https://img.shields.io/github/issues/lachlanchen/WordOrigins?color=red)](https://github.com/lachlanchen/WordOrigins/issues)
+[![GitHub repo size](https://img.shields.io/github/repo-size/lachlanchen/WordOrigins?color=yellow)](https://github.com/lachlanchen/WordOrigins)
 
 ![Word Origins Demo](word_origins.jpg)
 
-## Bức tranh nhanh
+## 📘 Tổng quan
+
+WordOrigins là một tiện ích web Python để phân tích nguồn gốc từ và trực quan hóa dòng dõi ngôn ngữ dưới dạng đồ thị có hướng. Công cụ này kết hợp:
+
+- Ứng dụng web Tornado.
+- Phân tích ngữ nguyên bởi OpenAI.
+- Phân tích cú pháp JSON có cấu trúc với cơ chế dự phòng linh hoạt.
+- Tạo đồ thị qua NetworkX + Matplotlib.
+- Lưu kết quả vào cache để phân tích lặp lại nhanh hơn.
+
+Nó cung cấp cả giao diện trình duyệt và các endpoint API để tạo ra và truy xuất tài nguyên về nguồn gốc từ.
+
+## 📸 Ảnh nhanh
 
 | Khu vực | Chi tiết |
 |---|---|
-| 🌐 Truy cập | Giao diện web để khám phá tương tác và API để xuất PNG dạng base64 |
-| 🧠 Trí tuệ | Phân tích từ nguyên bằng OpenAI với cú pháp JSON có cấu trúc |
-| 🧰 Tái tạo | JSON + PNG được lưu đệm cho mỗi từ đã xử lý |
-| 🌍 Hỗ trợ ngôn ngữ | Hỗ trợ nhiều ngôn ngữ cho CJK và Arabic với bộ font đi kèm |
-
-## Tổng quan
-
-WordOrigins là ứng dụng web Python cho phép bạn khám phá nguồn gốc ngôn ngữ (etymology) của các từ. Ứng dụng cung cấp phân tích chi tiết về quá trình biến đổi của từ theo thời gian, chia tách chúng thành các phần cấu trúc, truy vết đệ quy nguồn gốc ngôn ngữ của từng phần, sau đó hiển thị kết quả dưới dạng ảnh đồ thị để xem trong trình duyệt.
-
-### ✨ Tính năng nổi bật
-
-- Phân tích từ nguyên chi tiết cho mọi từ
-- Biểu diễn trực quan nguồn gốc từ qua đồ thị
-- Hỗ trợ nhiều ngôn ngữ gồm tiếng Anh, Pháp, Arabic, Nhật và Trung
-- Giao diện web tương tác để người dùng khám phá
+| 🌐 Truy cập | Giao diện Web cho phép khám phá tương tác và API trả về ảnh PNG base64 |
+| 🧠 Trí tuệ | Phân tích ngữ nguyên bằng OpenAI với phân tích JSON có cấu trúc |
+| 🧰 Tính tái lập | JSON + PNG được cache cho mỗi từ đã xử lý |
+| 🌍 Hỗ trợ ngôn ngữ | Hiển thị đa ngôn ngữ cho CJK và tiếng Ả Rập với font được đóng gói |
 
 ## Tính năng
 
 | Tính năng | Chi tiết |
 |---|---|
-| 🔎 Giao diện web | Tìm kiếm và duyệt các đồ thị từ nguyên đã tạo |
-| 🧠 Phân tích dựa trên OpenAI | Sử dụng API của OpenAI để tạo đầu ra từ nguyên có cấu trúc |
-| 💾 Bộ nhớ đệm | Lưu phản hồi OpenAI dưới dạng JSON có dấu thời gian |
-| 🖼️ Tạo artifact | Lưu đệm artifact JSON và PNG cho các từ đã phân tích trước đó |
-| 🌍 Kết xuất đa ngôn ngữ | Hỗ trợ font CJK và Arabic được đóng gói trong kho |
-| ↔️ Điều hướng | Duyệt qua ảnh từ trước/sau đã tạo |
-| 🔌 Hỗ trợ API | Endpoint trả về ảnh PNG dạng base64 |
+| 🔎 Giao diện Web | Tìm kiếm và duyệt đồ thị nguồn gốc đã tạo |
+| 🧠 Phân tích dựa trên OpenAI | Sử dụng API OpenAI để tạo đầu ra nguồn gốc có cấu trúc |
+| 💾 Bộ nhớ đệm | Lưu phản hồi cùng snapshot JSON có timestamp |
+| 🖼️ Sinh artefact | Xuất artefact JSON và PNG cho các từ đã xử lý |
+| 🌍 Kết xuất đa ngôn ngữ | Hỗ trợ CJK + Arabic bằng font đóng gói trong repo |
+| ↔️ Điều hướng | Duyệt từ trước/sau thông qua hình ảnh từ đã tạo |
+| 🔌 Hỗ trợ API | Endpoint trả về ảnh PNG dưới dạng payload JSON mã hóa base64 |
 
-## Cách hoạt động
+## 🛠️ Cách hoạt động
 
-1. Nhập từ cần phân tích.
-2. Hệ thống kết nối với API của OpenAI để thực hiện phân tích từ nguyên sâu.
-3. Bộ phân tích xác thực và chuyển đầu ra mô hình sang JSON có cấu trúc.
-4. Kết quả được lưu đệm và chuyển thành đồ thị có hướng.
-5. Đồ thị được kết xuất thành PNG và hiển thị trong giao diện web.
-6. Bạn có thể duyệt các từ đã được phân tích trước đó.
+1. Người dùng gửi một từ thông qua `/word/{word}` hoặc form tìm kiếm trên web.
+2. Bộ phân tích gọi OpenAI và xác thực cấu trúc phản hồi.
+3. Dữ liệu đã phân tích được chuẩn hóa và lưu lại để tái sử dụng cache.
+4. Quan hệ ngữ nguyên được chuyển thành các nút và cạnh của đồ thị.
+5. NetworkX và Matplotlib render đồ thị có hướng thành PNG.
+6. Giao diện UI và API hiển thị đường dẫn ảnh cache cùng metadata liên quan.
 
-## Cấu trúc dự án
+## 🗂️ Cấu trúc dự án
 
 ```text
 WordOrigins/
-├─ README.md
-├─ LICENSE
-├─ app.py                              # Điểm khởi chạy của máy chủ web Tornado
-├─ word_etymology_analyzer.py          # Phân tích từ nguyên + cache bằng OpenAI
-├─ etymology_graph.py                  # Tạo đồ thị với NetworkX + Matplotlib
-├─ utils.py                            # Tiện ích xử lý ảnh/texture
+├─ app.py                     # Tornado web app (current entrypoint)
+├─ app.py.old                 # Legacy app variant
+├─ word_etymology_analyzer.py # OpenAI-backed analysis + retry/caching logic
+├─ etymology_graph.py         # Graph building and PNG rendering
+├─ utils.py                   # Image/font/image helper utilities
 ├─ templates/
-│  ├─ index.html                       # Giao diện UI chính
-│  ├─ index.html.old                   # Phiên bản template cũ
-│  └─ carousel_items.html
+│  ├─ index.html              # Main web UI
+│  ├─ index.html.old          # Legacy template variant
+│  └─ carousel_items.html     # Reusable UI fragment
 ├─ static/
-│  └─ images/                          # Ảnh PNG đầu ra đã render chính
+│  └─ images/                 # Primary runtime PNG outputs
 ├─ statics/
-│  └─ images/                          # Thư mục ảnh trùng lặp dùng cho tương thích cũ
-├─ jsons/                              # Artifact JSON và hình ảnh cho từng từ
-├─ word_etymology_analysis/            # Cache phản hồi mô hình có dấu thời gian
-├─ processed_words.csv                  # Nhật ký các từ đã xử lý
-├─ i18n/                               # Tập tin README/tài liệu đa ngôn ngữ
-├─ archived_code/                      # Notebook và mã nguồn lịch sử
-├─ archived_data/                      # Kết quả JSON lịch sử
-├─ etymology*.ipynb                    # Các thí nghiệm trong notebook
-├─ Noto Sans CJK Regular/              # Font CJK đi kèm
+│  └─ images/                 # Legacy duplicate image folder
+├─ images/                    # Screenshot/demo assets
+├─ jsons/                     # Per-word generated JSON + cached data
+├─ word_etymology_analysis/   # Timestamped model response cache
+├─ processed_words.csv         # Processed word index
+├─ i18n/                      # Translated README files
+├─ archived_code/             # Historical notebooks and scripts
+├─ archived_data/             # Historical JSON snapshots
+├─ Noto Sans CJK Regular/     # Bundled font assets
 ├─ Noto_Sans/
-├─ Noto_Sans,Noto_Sans_Arabic/         # Bộ font Arabic + Noto đi kèm
-└─ arial-unicode-ms.ttf                # Font hỗ trợ Unicode
+├─ Noto_Sans,Noto_Sans_Arabic/
+├─ arial-unicode-ms.ttf       # Bundled Unicode font
+├─ etymology*.ipynb           # Development notebooks
+├─ LICENSE
+└─ .auto-readme-work/         # Pipeline artifacts
 ```
 
-## Điều kiện tiên quyết
+## Yêu cầu môi trường
 
 - Python 3.8+
-- Khóa API của OpenAI
-- Các font bắt buộc (đã có sẵn trong kho):
-  - Noto Sans CJK Regular
-  - Noto Sans Arabic
-  - Arial Unicode MS
+- Thông tin đăng nhập API OpenAI:
+  - `OPENAI_API_KEY` (bắt buộc)
+  - `OPENAI_MODEL` (không bắt buộc, mặc định `gpt-4-0125-preview` theo hướng dẫn hiện tại)
+- Font cần thiết đi kèm repository nếu bạn cần hiển thị đa ngôn ngữ
 
-## Cài đặt
+## 🧰 Cài đặt
 
-### Thiết lập
+1. Clone repository.
 
-1. Sao chép kho mã:
    ```bash
    git clone https://github.com/lachlanchen/WordOrigins.git
    cd WordOrigins
    ```
 
-2. Cài đặt các phụ thuộc:
+2. Tạo và kích hoạt môi trường Python (khuyến nghị).
+
    ```bash
-   pip install -r requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate
    ```
 
-3. Thiết lập khóa OpenAI API dưới dạng biến môi trường:
+3. Cài đặt các thư viện runtime.
+
+   Vì repository này chưa có manifest phụ thuộc gốc, hãy cài trực tiếp các gói runtime đã biết:
+
+   ```bash
+   pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5
+   ```
+
+4. Cấu hình thông tin đăng nhập.
+
    ```bash
    export OPENAI_API_KEY=your_api_key_here
+   export OPENAI_MODEL=gpt-4-0125-preview   # optional override
    ```
 
-### Ghi chú về phụ thuộc
+## 🚀 Sử dụng
 
-Mã nguồn import các gói sau khi chạy:
+### Chạy ứng dụng Web
+
+```bash
+python app.py
+```
+
+Mở `http://localhost:7788` trong trình duyệt của bạn.
+
+### Luồng sử dụng điển hình
+
+1. Mở `http://localhost:7788/word/etymology`.
+2. Nhập một từ.
+3. Đợi quá trình phân tích (lần chạy đầu tiên có thể lâu hơn do độ trễ của API bên ngoài).
+4. Khám phá đồ thị và metadata đã được tạo.
+5. Dùng điều hướng trước/sau để duyệt các từ đã cache.
+
+### Endpoints API
+
+| Phương thức | Endpoint | Mô tả |
+|---|---|---|
+| `GET` | `/word/{word_to_analyze}` | Render một trang cho ngữ nguyên của từ đã yêu cầu |
+| `GET` | `/word/next-word?word={word}` | Điều hướng sang từ tiếp theo trong cache |
+| `GET` | `/word/prev-word?word={word}` | Điều hướng sang từ trước đó trong cache |
+| `GET/POST` | `/get_word_etymology/{word}` | Trả về body JSON kèm payload PNG mã hóa base64 |
+
+### Ví dụ gọi API
+
+```bash
+curl "http://localhost:7788/word/etymology"
+curl "http://localhost:7788/word/next-word?word=etymology"
+curl "http://localhost:7788/word/prev-word?word=etymology"
+curl "http://localhost:7788/get_word_etymology/etymology"
+```
+
+## ⚙️ Cấu hình
+
+- `OPENAI_API_KEY` (bắt buộc): thông tin xác thực cho các request phân tích.
+- `OPENAI_MODEL` (không bắt buộc): override mô hình cho bộ phân tích.
+- Các thư mục runtime được ứng dụng sử dụng:
+  - `jsons/`
+  - `static/images/`
+  - `word_etymology_analysis/`
+  - `processed_words.csv`
+
+## 🧪 Ví dụ
+
+```bash
+python app.py
+```
+
+Sau đó mở:
+
+```text
+http://localhost:7788/word/revolution
+```
+
+Các artefact được tạo cho lần phân tích đầu tiên:
+
+- `jsons/revolution.json`
+- `static/images/revolution.png`
+- `word_etymology_analysis/revolution-<timestamp>.json`
+
+## Thành phần
+
+### WordEtymologyAnalyzer
+
+Nằm trong `word_etymology_analyzer.py`, thành phần này:
+
+- Chuẩn hóa từ đầu vào.
+- Gọi OpenAI để lấy phản hồi ngữ nguyên theo cấu trúc.
+- Trích xuất/sửa chữa payload JSON với `json5`.
+- Thử lại khi parse thất bại và ghi nhận lỗi để tăng độ bền.
+- Ghi snapshot có timestamp vào `word_etymology_analysis/`.
+- Cập nhật chỉ mục `processed_words.csv`.
+
+### EtymologyGraph
+
+Nằm trong `etymology_graph.py`, thành phần này:
+
+- Nạp JSON nguồn gốc đã cấu trúc.
+- Xây `networkx.DiGraph` với quan hệ tổ tiên đệ quy.
+- Tính toán tọa độ đồ thị theo độ sâu.
+- Render các nút và cạnh có nhãn với xử lý văn bản đa ngôn ngữ.
+- Lưu ảnh `PNG` cho caching và trình bày.
+
+### Ứng dụng Web
+
+Trong `app.py`, ứng dụng Tornado:
+
+- Phục vụ redirect trang gốc và hành vi trang tìm kiếm.
+- Xử lý quy trình sinh và tra cứu cache.
+- Công khai route cho trang và API tại `/word/...` và `/get_word_etymology/...`.
+- Trả về payload JSON chứa dữ liệu ảnh base64 cho người dùng API.
+
+## 📦 Dependencies
+
 - `tornado`
 - `openai`
 - `matplotlib`
@@ -131,178 +242,52 @@ Mã nguồn import các gói sau khi chạy:
 - `cjkwrap`
 - `json5`
 
-Giả định: `requirements.txt` cần chứa các gói ở trên. Nếu bản sao cục bộ của bạn thiếu `requirements.txt`, hãy cài thủ công các gói này.
+## 🧱 Ghi chú phát triển
 
-## Cách sử dụng
+- Bộ nhớ đệm JSON và hình ảnh giúp tránh gọi API lặp lại không cần thiết.
+- `index.html` và `index.html.old` được giữ lại vì tính tương thích và lịch sử.
+- Các thư mục và artefact kế thừa hiện được giữ cố ý (`statics/`, notebooks, archives).
+- Tệp `.gitignore` có dấu hiệu còn marker xung đột hợp nhất và nằm ngoài phạm vi sửa README.
 
-### Chạy ứng dụng web
-
-Khởi động máy chủ Tornado:
-
-```bash
-python app.py
-```
-
-Sau đó mở trình duyệt và đi tới `http://localhost:7788`.
-
-### Luồng sử dụng điển hình
-
-1. Mở `http://localhost:7788`.
-2. Nhập một từ vào ô tìm kiếm.
-3. Ứng dụng sẽ phân tích và hiển thị đồ thị từ nguyên.
-4. Dùng điều khiển trước/sau để duyệt các từ đã tạo.
-
-### API Endpoints
-
-| Method | Endpoint | Mô tả |
-|---|---|---|
-| `GET` | `/word/{word_to_analyze}` | Tạo và hiển thị đồ thị từ nguyên cho một từ |
-| `GET` | `/word/next-word` | Di chuyển tới từ kế tiếp trong danh sách |
-| `GET` | `/word/prev-word` | Di chuyển về từ trước đó trong danh sách |
-| `GET/POST` | `/get_word_etymology/{word}` | Endpoint API để lấy dữ liệu từ nguyên dưới dạng payload PNG base64 |
-
-### Ví dụ gọi API
-
-```bash
-# Tạo/xem một từ trên trình duyệt
-curl "http://localhost:7788/word/etymology"
-
-# Lấy payload ảnh base64
-curl "http://localhost:7788/get_word_etymology/etymology"
-```
-
-## Cấu hình
-
-### Biến môi trường
-
-- `OPENAI_API_KEY` (bắt buộc): khóa API mà OpenAI Python client sử dụng
-- `OPENAI_MODEL` (tùy chọn): tên mô hình mà module phân tích dùng (mặc định `gpt-4-0125-preview`)
-
-### Thư mục runtime được tạo/sử dụng bởi ứng dụng
-
-- `jsons/`
-- `static/images/`
-- `word_etymology_analysis/`
-- `processed_words.csv`
-
-## Các thành phần
-
-### WordEtymologyAnalyzer
-
-Kết nối đến API của OpenAI để lấy thông tin từ nguyên chi tiết cho một từ. Bao gồm logic cache và thử lại:
-
-- Chuyển từ đầu vào về chữ thường và chuẩn hóa
-- Thử phân tích cú pháp JSON đầu ra một cách bền vững (`json5`)
-- Lưu ảnh phân tích có dấu thời gian trong `word_etymology_analysis/`
-- Ghi nhận các từ đã xử lý vào `processed_words.csv`
-
-### EtymologyGraph
-
-Tạo biểu diễn trực quan cho dữ liệu từ nguyên bằng NetworkX và Matplotlib:
-
-- Ánh xạ đệ quy phần từ nguyên lồng nhau thành các nút/cạnh của đồ thị có hướng
-- Tính toán vị trí tâm theo độ sâu
-- Vẽ nhãn phần/nghĩa/ví dụ và nhãn cạnh ngôn ngữ
-- Xử lý kết xuất văn bản đa ngôn ngữ với font đi kèm
-
-### Ứng dụng web
-
-Máy chủ web dựa trên Tornado xử lý request và phục vụ giao diện:
-
-- Chuyển hướng `/` về `/word/etymology`
-- Kết xuất đồ thị từ trong `static/images/`
-- Tạo phân tích/hình ảnh còn thiếu theo yêu cầu
-
-## Ví dụ
-
-### Phân tích một từ mới
-
-```bash
-python app.py
-# sau đó mở http://localhost:7788/word/revolution
-```
-
-Kết quả dự kiến sau lần chạy đầu tiên:
-
-- `jsons/revolution.json`
-- `static/images/revolution.png`
-- `word_etymology_analysis/revolution-<timestamp>.json`
-
-### Duyệt các từ đã được tạo
-
-```text
-http://localhost:7788/word/next-word?word=etymology
-http://localhost:7788/word/prev-word?word=etymology
-```
-
-## Chi tiết kỹ thuật
-
-- Ứng dụng lưu các tệp JSON của từ đã phân tích để làm cache.
-- Ảnh được tạo dưới dạng tệp PNG.
-- Có xử lý font đặc biệt cho hỗ trợ đa ngôn ngữ.
-- Bố cục đồ thị được tính toán dựa trên độ sâu nút và quan hệ.
-- Kho mã hiện có notebook thăm dò và artifact lưu trữ dùng trong quá trình phát triển.
-
-## Ghi chú phát triển
-
-- Điểm khởi chạy runtime chính là `app.py`.
-- Tệp notebook (`etymology*.ipynb`) mang tính thử nghiệm và có thể khác với luồng server production.
-- Có các đường dẫn trùng lặp/legacy (`statics/` so với `static/`, các tệp `.old`) được giữ vì lý do lịch sử.
-- `.gitignore` hiện tại dường như chứa marker giải quyết xung đột chưa được xử lý; nên dọn dẹp trước khi đóng gói phát hành.
-
-## Khắc phục sự cố
+## 🧯 Xử lý sự cố
 
 | Vấn đề | Cách khắc phục |
 |---|---|
-| `ModuleNotFoundError` khi khởi động | Cài phụ thuộc còn thiếu: `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
-| Lỗi `OPENAI_API_KEY` hoặc lỗi xác thực | Kiểm tra `OPENAI_API_KEY` đã được export trong cùng phiên terminal khi bạn chạy `python app.py` |
-| Văn bản đồ thị hiển thị thành ô vuông hoặc thiếu glyph | Kiểm tra các tệp font đã được đóng gói có tồn tại đúng đường dẫn trong kho |
-| Không có hình cho một từ | Kiểm tra logs máy chủ để xem lỗi/retry parse JSON và xác nhận quyền truy cập mạng/API |
-| `pip install -r requirements.txt` lỗi vì thiếu file | Tạo file phụ thuộc cục bộ từ danh sách package trong README này hoặc cài trực tiếp các package |
+| `ModuleNotFoundError` khi khởi chạy | Cài thiếu package với `pip install tornado openai matplotlib networkx numpy pillow cjkwrap json5` |
+| Lỗi xác thực `OPENAI_API_KEY` | Đảm bảo biến đã được export trong cùng phiên terminal đang chạy `python app.py` |
+| Thiếu/méo lỗi chữ trong đồ thị sinh ra | Kiểm tra font đi kèm (`Noto Sans`, biến thể Arabic, Arial Unicode MS) có tồn tại và có quyền đọc |
+| Không có ảnh hiển thị cho một từ | Kiểm tra log ứng dụng để phát hiện lỗi parse JSON hoặc lỗi API tạm thời |
+| `pip install -r requirements.txt` thất bại/không tồn tại | Cài dependency trực tiếp như trên (repo hiện tại không có manifest gốc) |
+
+## 🗺️ Roadmap
+
+- Bổ sung thêm hỗ trợ ngôn ngữ.
+- Thêm tài khoản người dùng cho việc lưu các ngữ nguyên yêu thích.
+- Cải thiện điều hướng đồ thị với tương tác zoom/pan.
+- Bổ sung metadata ngôn ngữ phong phú hơn trong mỗi node đồ thị.
+- Thêm file manifest phụ thuộc được quản lý và thiết lập môi trường tái lập.
+- Bổ sung tests cho parser analyzer, hành vi cache và route handlers.
+
+## 🤝 Đóng góp
+
+1. Fork repository.
+2. Tạo branch tính năng.
+3. Thực hiện thay đổi nhỏ gọn, dễ review.
+4. Kiểm tra bằng cách chạy `python app.py` và xác thực các route quan trọng.
+5. Tạo PR kèm hướng dẫn tái lập, ảnh chụp màn hình/API examples.
+
+## 🙌 Lời cảm ơn
+
+- OpenAI vì khả năng phân tích dựa trên language model.
+- Những đóng góp của cộng đồng font chữ Google Noto cho hỗ trợ hiển thị đa ngôn ngữ.
 
 ## ❤️ Support
 
 | Donate | PayPal | Stripe |
-|---|---|---|
-| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
 
-## Lộ trình
+## License
 
-- Bổ sung hỗ trợ thêm ngôn ngữ.
-- Triển khai tài khoản người dùng để lưu các từ nguyên yêu thích.
-- Cải tiến trực quan hóa đồ thị với phóng to/di chuyển.
-- Thêm thông tin ngôn ngữ học chi tiết hơn.
-- Thêm manifest phụ thuộc được duy trì và setup môi trường tái lập.
-- Thêm kiểm thử cho xử lý phân tích, hành vi cache và route handlers.
-
-## Đóng góp
-
-Mọi đóng góp đều được hoan nghênh. Quy trình gợi ý:
-
-1. Fork repository.
-2. Tạo một nhánh feature.
-3. Thực hiện thay đổi có phạm vi rõ ràng và dễ review.
-4. Kiểm tra bằng cách chạy `python app.py` và kiểm tra các route chính.
-5. Tạo pull request với mô tả rõ ràng và screenshot/mẫu API khi phù hợp.
-
-## Dependencies
-
-- tornado: Khung máy chủ web
-- openai: Client OpenAI API
-- matplotlib: Dùng để tạo đồ thị
-- networkx: Dùng cho cấu trúc dữ liệu đồ thị
-- PIL/Pillow: Dùng cho xử lý ảnh
-- numpy: Cho các phép toán số
-- cjkwrap: Xử lý gói chữ CJK
-- json5: Phân tích cú pháp JSON theo cách bền vững
-
-## Lời cảm ơn
-
-- OpenAI vì đã cung cấp khả năng phân tích ngôn ngữ
-- Google Noto fonts cho hỗ trợ văn bản đa ngôn ngữ
-
-## Giấy phép
-
-Apache License 2.0
-
-Xem [LICENSE](LICENSE) để đọc toàn bộ điều khoản.
+Apache License 2.0  
+Xem [LICENSE](LICENSE) để biết đầy đủ điều khoản.
